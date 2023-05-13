@@ -1,2 +1,2 @@
-# LeetcodePracticeProblems
-pod, practice problems contest and more
+# DSA Sheet and more
+solving dsa sheet and random related problems
