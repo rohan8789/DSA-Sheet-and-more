@@ -1,0 +1,33 @@
+
+//Brute force
+long long maxSubarraySum(int arr[], int n){
+    // Your code here
+    ll sum;
+        ll totalsum=INT_MIN;
+    for(int i=0; i<n; i++){
+        sum=0;
+        for(int j=i; j<n; j++){
+            sum=sum+arr[j];
+            totalsum=max(totalsum,sum);
+        }
+
+    }
+    return totalsum;
+}
+
+//kadanes algo, linear time constant space
+ typedef long long ll;
+  long long maxSubarraySum(int arr[], int n){
+      // Your code here
+      ll sum=0;
+      ll totalsum=INT_MIN;
+      for(int i=0; i<n; i++){
+          sum+=arr[i];
+          if(sum>totalsum){
+              totalsum=sum;
+          }
+          if(sum<0)sum=0;
+      }
+      return totalsum;
+
+  }
