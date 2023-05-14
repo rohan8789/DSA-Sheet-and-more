@@ -1,0 +1,40 @@
+/*
+We will maintain 3 variable. 
+maxReach:- it will contain the value of maximum distance that can be reached from any given point //initially mReach=arr[0], as it is our starting point
+steps:- we will subtract the distance we covered from any given point //steps =arr[0], since we have available steps as value of arr[0] to move ahead;
+Jumps:- whenever steps will become zero. we will apply some logic and check if we have anymore steps left to continue our journey
+
+
+{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}  mjump=3;
+Intution, we start from i=1, we will take maximum between (maxReach, arr[i]+i). but Why i+arr[i]?? because we are standing on i=1, and checking if by using 
+our next element i.e, 3, till where we can reach. means (1+3), we could reach to 9(index 4). that is why we are updating i+arr[i]
+
+Now, since we moved a step ahead, we have to do step-1;
+let say, we reached 9 and steps have become 0
+if steps == 0, incremented jump as here we have to take jump.
+here we will update steps = maxReach-i for obvious reason mentioned with i+arr[i]
+and checking if i>maxReach means maxReach can never reach i as we are left with 0 steps.
+
+finally we are applying a check if our index has reached n-1, last array value we will return our total jumps.
+*/
+
+
+int minJumps(int arr[], int n){
+    // Your code here
+    if(n==1)return 0;
+    if(arr[0]==0)return -1;
+    int maxReach=arr[0];
+    int steps=arr[0];
+    int jumps=1;
+    for(int i=1; i<n; i++){
+        if(i==n-1)return jumps;
+        maxReach=max(maxReach,i+arr[i]);
+        steps--;
+        if(steps==0){
+            jumps++;
+            if(i>=maxReach)return -1;
+            steps=maxReach-i;
+        }
+    }
+    return -1;
+}
