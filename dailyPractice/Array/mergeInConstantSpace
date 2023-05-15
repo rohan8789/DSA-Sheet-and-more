@@ -1,0 +1,26 @@
+//First Optimal Solution  (N+M)log(N+M)
+/*
+Intuition:- both arrays are sorted but when we merge both array resultant might be unsorted. say for example
+arr1 = {1,5,9,15}
+arr2 = {2,3,8,12}
+after merging these arrays we are expected two get sorted array. but for that, last element of arr1 must be less than first element of arr2, 
+to do that. we initialize a pointer from last of arr1 and another pointer from start of arr2 and swapped when arr1>arr2.
+This way we segreggated in correct way. finally we applied sorting on both arrays and returned.
+*/
+
+
+
+void merge(long long arr1[], long long arr2[], int n, int m) 
+{ 
+    // code here O(M*(N*logN))
+    int i=n-1, j=0;
+    while(i>=0 && j<=m-1){
+        if(arr1[i]>arr2[j]){
+            swap(arr1[i], arr2[j]);
+        }
+        i--;j++;
+    }
+    sort(arr1,arr1+n);
+    sort(arr2,arr2+m);
+} 
+
