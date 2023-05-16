@@ -1,0 +1,21 @@
+/*
+Logic is simple mathematics
+if a+b=k
+   b=k-a
+   means we check if value of given sum - value of arr[i] is present in array or not. then we are pushing that element and its frequency to map
+   if we find the element in map then we simply add its frequency to count.
+*/
+class Solution{   
+public:
+    int getPairsCount(int arr[], int n, int k) {
+        int c=0;
+        unordered_map<int,int>m;
+        for(int i=0; i<n; i++){
+            if(m.find(k-arr[i])!=m.end()){
+                c=c+m[k-arr[i]];
+            }
+            m[arr[i]]++;
+        }
+        return c;
+    }
+};
