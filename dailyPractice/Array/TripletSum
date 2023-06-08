@@ -1,0 +1,20 @@
+bool find3Numbers(int arr[], int n, int x)
+{
+    //Your Code Here
+    sort(arr,arr+n);
+    for(int i=0; i<n-2; i++){
+        int l=i+1; 
+        int h=n-1;
+        while(l<h){
+            int s=arr[i]+arr[l]+arr[h];
+            if(s==x){
+                return true;
+            }else if(s>x){
+                h--;
+            }else{
+                l++;
+            }
+        }
+    }
+    return false;
+}
