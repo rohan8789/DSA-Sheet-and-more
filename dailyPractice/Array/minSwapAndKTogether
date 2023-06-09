@@ -1,0 +1,36 @@
+11
+10 12 20 20 5 19 19 12 1 20 1
+1
+
+Intuition:-
+1. Count numbers <=k. that will your window size.
+2. loop around windowsize and find elements needed to be swapped i.e, >k elements
+3. maintain the window and minimize the amount of elements that are needed to be swapped
+
+
+int minSwap(int arr[], int n, int k) {
+    // Complet the function
+    int winsize=0,gret=0;
+    for(int i=0; i<n; i++){
+        if(arr[i]<=k){
+            winsize++;
+        }
+    }
+
+    for(int i=0; i<winsize; i++){
+        if(arr[i]>k){
+            gret++;
+        }
+    }
+    int ans=gret;
+    for(int i=winsize; i<n; i++){
+        if(arr[i]>k){
+            gret++;
+        }
+        if(arr[i-winsize]>k){
+            gret--;
+        }
+        ans=min(ans,gret);
+    }
+    return ans;
+}
