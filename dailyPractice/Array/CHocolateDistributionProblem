@@ -1,0 +1,22 @@
+long long findMinDiff(vector<long long> arr, long long n, long long m){
+    sort(arr.begin(),arr.end());
+    for(long long i=0; i<n; i++){
+        //cout<<arr[i]<<" ";
+    }
+    //cout<<endl;
+    long long x=LONG_MAX,y=LONG_MIN;
+    for(long long i=0; i<m; i++){
+
+        x=min(x,arr[i]);
+        y=max(y,arr[i]);
+    }
+    long long d=y-x;
+    long long j=1;
+    for(long long i=m; i<n; i++){
+        x=arr[i-m+j];
+        y=arr[i];
+        d=min(d,y-x);
+    }
+    return d;
+
+}   
