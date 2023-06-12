@@ -1,0 +1,25 @@
+//find square root or nearest value to the square root;
+
+class Solution{
+  public:
+    typedef long long ll;
+    long long int floorSqrt(long long int n) 
+    {
+        ll l=1,h=n, ans=0;
+        while(l<=h){
+            ll m=(l+h)/2;
+            ll res=m*m;
+            if(res==n){
+                return m;
+            }
+            else if(res>n){
+                h=m-1;
+            }else{
+                ans=m;
+                l=m+1;
+            }
+        }
+        return ans;
+        
+    }
+};
