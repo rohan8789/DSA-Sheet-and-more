@@ -1,0 +1,49 @@
+int first(int arr[], int n, int x){
+    int l=0,h=n-1;
+    while(l<=h){
+        int m=(l+h)/2;
+        if(arr[m]<x){
+            l=m+1;
+        }else if(arr[m]>x){
+            h=m-1;
+        }else{
+            if(arr[m]!=arr[m-1]||m==0){
+                return m;
+            }else{
+                h=m-1;
+            }
+        }
+    }
+    return -1;
+}
+
+
+int last(int arr[], int n, int x){
+    int l=0, h=n-1;
+    while(l<=h){
+        int m=(l+h)/2;
+        if(arr[m]>x){
+            h=m-1;
+        }else if(arr[m]<x){
+            l=m+1;
+        }else{
+            if(arr[m]!=arr[m+1]||m==n-1){
+                return m;
+            }else{
+                l=m+1;
+            }
+        }
+    }
+    return -1;
+}
+
+vector<int> find(int arr[], int n , int x )
+{
+    // code here
+    vector<int> v;
+    int p=first(arr,n,x);
+    int q=last(arr,n,x);
+    v.push_back(p);
+    v.push_back(q);
+    return v;
+}
