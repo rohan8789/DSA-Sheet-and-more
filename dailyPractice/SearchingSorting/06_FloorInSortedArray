@@ -1,0 +1,21 @@
+typedef long long ll;
+int findFloor(vector<long long> v, long long n, long long x){
+
+    // Your code here
+    if(v[n-1]<x){
+        return n-1;
+    }
+    ll l=0, h=n-1, ans=-1;
+    while(l<=h){
+        ll m=(l+h)/2;
+        if(v[m]==x){
+            return m;
+        }else if(v[m]>x){
+            h=m-1;
+        }else{
+            l=m+1;
+            ans=l;
+        }
+    }
+    return ans;
+}
