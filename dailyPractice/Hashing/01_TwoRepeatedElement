@@ -28,7 +28,7 @@ class Solution {
 };
 
 Method 2:- 
-//Marking the index as negative 
+//Marking the index as negative , it will not work for more than two negative element
 Intuition:- 
 
 The idea is to mark the elements in the array as negative. when index is found which is already marked then it can be our answer
