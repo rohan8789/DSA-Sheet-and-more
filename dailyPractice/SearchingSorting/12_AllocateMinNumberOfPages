@@ -1,0 +1,49 @@
+11
+13 31 37 45 46 54 55 63 73 84 85
+9
+
+
+
+class Solution 
+{
+    public:
+    
+    int solve(int arr[],int n, int m){
+        int s=0;
+        int c=1;
+        for(int i=0; i<n; i++){
+            s+=arr[i];
+            if(s>m){
+                s=arr[i];
+                c++;
+            }
+        }
+        return c;
+    }
+    
+    //Function to find minimum number of pages.
+    int findPages(int arr[], int n, int m) 
+    {
+        //code here
+        if(m>n)return -1;
+        int l=0,h=0;
+        int ans=0;
+        for(int i=0; i<n; i++){
+            h=h+arr[i];
+            l=max(l,arr[i]);
+        }
+        while(l<=h){
+            int mid=(l+h)/2;
+            // cout<<m<<endl;
+            if(solve(arr,n, mid)>m){
+                l=mid+1;
+            }else{
+                ans=mid;
+                h=mid-1;
+            }
+        }
+        return ans;
+    }
+    
+    
+};
