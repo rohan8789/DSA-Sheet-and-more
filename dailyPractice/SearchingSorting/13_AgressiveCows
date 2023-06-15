@@ -1,0 +1,41 @@
+class Solution {
+public:
+
+    int solve(vector<int>&v, int m, int k){
+        int x=v[0];
+        int cow=1;
+        for(int i=1; i<v.size(); i++){
+            // cout<<x<<" "<<v[i]<<" ";
+            if(v[i]-x>=m){
+               cow++;
+               x=v[i];
+            }
+            // cout<<cow<<" "<<m<<endl;
+            if(cow==k){
+                return cow;
+            }
+            
+        }
+        return cow;
+    }
+    
+    int solve(int n, int k, vector<int> &stalls) {
+        sort(stalls.begin(),stalls.end());
+        int l=1;
+        int h=stalls[n-1]-stalls[0];
+        int ans=0;
+        //cout<<l<<" "<<h<<endl;
+        while(l<=h){
+            int m=(l+h)/2;
+            // cout<<l<<" "<<m<<" "<<h<<endl;
+            if(solve(stalls, m, k)>=k){
+               ans=m;
+               l=m+1;
+            }else{
+                h=m-1;
+            }
+        }
+        // cout<<"hi";
+        return ans;
+    }
+};
