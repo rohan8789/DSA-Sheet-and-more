@@ -1,0 +1,62 @@
+Given array, size and value X find pair such that it is equal to X ------------> q-p=x  ===> q=p+x;
+
+
+//hashing method
+bool findPair(int arr[], int n, int x){
+    //code
+    unordered_map<int,int>m;
+    m[0]=0;
+    for(int i=0; i<n; i++){
+        m[arr[i]]++;
+    }
+    int m1=INT_MIN;
+    for(auto i:m){
+        m1=max(m1,i.second);
+    }
+    if(x==0&&m1<=1)return false;
+    for(int i=0; i<n; i++){
+        if(m.find(arr[i]+x)!=m.end()){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+//Binary search method
+//arr = 2 3 5 5 20 80 x=17
+by above logic
+search 2+17
+search 3+17
+and so on...
+
+
+bool findPair(int arr[], int n, int x){
+    //code
+    sort(arr, arr+n);
+    for(int i=0; i<n-1; i++){
+        if(x==0&&arr[i]==arr[i+1])return true;
+    }
+    
+    for(int i=0; i<n-1; i++){
+        if(x==0&&arr[i]!=arr[i+1])return false;
+    }
+    
+    for(int i=0; i<n; i++){
+        int y=x+arr[i];
+        int l=0;
+        int h=n-1;
+        //cout<<y<<endl;
+        while(l<=h){
+            int m=(l+h)/2;
+            if(arr[m]==y){
+                return true;
+            }else if(arr[m]<y){
+                l=m+1;
+            }else{
+                h=m-1;
+            }
+        }
+    }
+        return false;
+}
