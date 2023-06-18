@@ -1,0 +1,7 @@
+Method 1:- 3 pointer +Binary search
+1 1 1 2 2 2 3 3 3 4 4 target = 9
+i=0, j=i+1, k=j+1;
+//we have
+i=1 j=1 k=1 now apply BS on element (2-4) and find 9-(i+1+1)
+//You will get your first answer on i=1 j=1 k=3 hence 
+apply bs  find 9-(1+1+3) === 4 available in search range.
