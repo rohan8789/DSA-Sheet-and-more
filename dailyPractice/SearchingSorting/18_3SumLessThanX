@@ -1,5 +1,6 @@
 //eg:- 1 3 4 5 7  target=12
 a=1 b=3 c=7 total = 11<12, then, all elements less than 7 would be considered i.e, 137, 135, 134
+Hence, instead of doing +1 we will do +(h-l)
 
 class Solution{
 	public:
