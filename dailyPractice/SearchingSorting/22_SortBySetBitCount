@@ -10,3 +10,43 @@ class Solution{
         stable_sort(arr,arr+n, cmp);
     }
 };
+
+
+
+
+
+
+
+Method 02:- Raw Implementation
+class Solution{
+    public:
+    
+    int count(int n){
+        int c=0;
+        while(n!=0){
+           // cout<<n%2<<" ";
+            if(n%2!=0){
+                c++;
+            }
+            n=n/2;
+        }
+        return c;
+    }
+    
+    void sortBySetBitCount(int arr[], int n)
+    {
+        // Your code goes here
+        map<int,vector<int>, greater<int>>mv;
+        for(int i=0; i<n; i++){
+            int x=count(arr[i]);
+            mv[x].push_back(arr[i]);
+        }
+        int k=0;
+        for(auto i:mv){
+            for(auto j:i.second){
+                arr[k]=j;
+                k++;
+            }
+        }
+    }
+};
