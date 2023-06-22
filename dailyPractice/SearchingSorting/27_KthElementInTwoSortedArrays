@@ -3,33 +3,32 @@ class Solution{
     int kthElement(int arr1[], int arr2[], int n, int m, int mm)
     {
         int i=0,j=0,k=0;
-        int *c=new int[n+m];
         int ans=0;
         while(i<n && j<m)
         {
+            if(k==mm)break;
             if(arr1[i]<=arr2[j])
             {
-                c[k++]=arr1[i++];
+                ans=arr1[i++];
             }
             else{
-                c[k++]=arr2[j++];
+                ans=arr2[j++];
             }
+            k++;
         }
         while(i<n)
         {
-            c[k++]=arr1[i++];
+            if(k==mm)break;
+            ans=arr1[i++];
+            k++;
         }
         while(j<m)
         {
-            c[k++]=arr2[j++];
+            if(k==mm)break;
+            ans=arr2[j++];
+            k++;
         }
-        for(int i=0; i<k; i++)
-        {
-            if(i+1==mm){
-                ans=c[i];
-                break;
-            }
-        }
+        
         return ans;
     }
 };
