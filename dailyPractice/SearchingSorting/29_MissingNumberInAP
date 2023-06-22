@@ -1,0 +1,17 @@
+class Solution{
+public:
+    int inSequence(int A, int B, int d){
+        // code here
+        if(B==A)return 1;
+        
+        if(B>A&&d>0){
+            int x=B-A;
+            if(x%d==0)return 1;
+        }
+        if(B<A&&d<0){
+            int x=B-A;
+            if(x%d==0)return 1;
+        }
+        return 0;
+    }
+};
