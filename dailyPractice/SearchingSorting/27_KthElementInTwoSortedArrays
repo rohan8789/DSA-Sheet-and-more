@@ -1,0 +1,35 @@
+class Solution{
+    public:
+    int kthElement(int arr1[], int arr2[], int n, int m, int mm)
+    {
+        int i=0,j=0,k=0;
+        int *c=new int[n+m];
+        int ans=0;
+        while(i<n && j<m)
+        {
+            if(arr1[i]<=arr2[j])
+            {
+                c[k++]=arr1[i++];
+            }
+            else{
+                c[k++]=arr2[j++];
+            }
+        }
+        while(i<n)
+        {
+            c[k++]=arr1[i++];
+        }
+        while(j<m)
+        {
+            c[k++]=arr2[j++];
+        }
+        for(int i=0; i<k; i++)
+        {
+            if(i+1==mm){
+                ans=c[i];
+                break;
+            }
+        }
+        return ans;
+    }
+};
