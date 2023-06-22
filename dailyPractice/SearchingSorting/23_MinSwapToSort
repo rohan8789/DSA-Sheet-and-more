@@ -1,0 +1,26 @@
+class Solution 
+{
+    public: 
+	int minSwaps(vector<int>&arr)
+	{
+	    // Code here
+	    vector<pair<int,int>>vp;
+	    int n=arr.size();
+	    for(int i=0; i<n; i++){
+	        vp.push_back({arr[i], i});
+	    }
+	    
+	    sort(vp.begin(), vp.end());
+	    int c=0;
+	    for(int i=0; i<n; i++){
+	        if(i==vp[i].second){
+	            continue;
+	        }else{
+	            c++;
+	            swap(vp[i], vp[vp[i].second]);
+	            i--;
+	        }
+	    }
+	    return c;
+	}
+};
