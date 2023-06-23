@@ -1,0 +1,48 @@
+1. sort 0s, 1s, 2s.
+2. Three way partitioning
+3. partition around a range
+
+
+class Solution{   
+public:
+    void threeWayPartition(vector<int>& array,int a, int b)
+    {
+        int l=0,mid=0, h=array.size()-1;
+        while(mid<=h){
+            if(array[mid]<a){
+                swap(array[l], array[mid]);
+                l++;mid++;
+            }
+            else if(array[mid]>=a && array[mid]<=b){
+                mid++;
+            }else{
+                swap(array[mid], array[h]);
+                h--;
+            }
+        }
+    }
+};
+
+
+
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int h=nums.size()-1;
+        int l=0, mid=0;
+        while(true){
+            if(mid>h)break;
+            if(nums[mid]==0){
+                swap(nums[l],nums[mid]);
+                l++;mid++;
+            }else if(nums[mid]==1){
+                mid++;
+            }else{
+                swap(nums[mid],nums[h]);
+                h--;
+            }
+        }
+    }
+};
