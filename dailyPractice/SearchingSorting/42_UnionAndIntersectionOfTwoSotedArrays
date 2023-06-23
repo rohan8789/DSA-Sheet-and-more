@@ -1,0 +1,68 @@
+//Union
+class Solution{
+    public:
+    vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        vector<int>v;
+        int i=0,j=0;
+        while(i<n&&j<m){
+            if(arr1[i]==arr1[i+1]&&i+1<n){
+                i++;continue;
+            }
+            if(arr2[j]==arr2[j+1]&&j+1<m){
+                j++;continue;
+            }
+            if(arr1[i]==arr2[j]){
+                v.push_back(arr1[i]);
+                i++;j++;
+            }
+            else if(arr1[i]<arr2[j]){
+                v.push_back(arr1[i]);
+                i++;
+            }else{
+                v.push_back(arr2[j]);
+                j++;
+            }
+        }
+         while(i<n){
+             if(arr1[i]==arr1[i+1]&&i+1<n){
+                i++;continue;
+            }
+            v.push_back(arr1[i]);
+            i++;
+        }
+         while(j<m){
+            if(arr2[j]==arr2[j+1]&&j+1<m){
+                j++;continue;
+            }
+            v.push_back(arr2[j]);
+            j++;
+        }
+        return v;
+    }
+};
+
+
+
+
+
+
+
+class Solution {
+  public:
+  
+    int NumberofElementsInIntersection(int arr[], int brr[], int n, int m) {
+       
+        int i=0,j=0,c=0;
+        sort(arr, arr+n);
+        sort(brr,brr+m);
+        while(i<n && j<m){
+            while(arr[i]==arr[i+1]&&i+1<n)i++;
+            while(brr[j]==brr[j+1]&&j+1<m)j++;
+            if(arr[i]<brr[j])i++;
+            else if(arr[i]>brr[j])j++;
+            else{ i++; j++; c++;}
+        }
+        return c;
+    }
+};
