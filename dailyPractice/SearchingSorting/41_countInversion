@@ -1,0 +1,39 @@
+void merge(long long  arr[], long long l, long long m, long long h, long long &c){
+        long long i=l;
+        long long j=m+1;
+        long long k=l;
+        long long brr[h];//dont make it all zero. it cause tle
+        while(i<=m&&j<=h){
+            if(arr[i]<=arr[j]){
+                brr[k++]=arr[i++];
+            }else if(arr[i]>arr[j]){
+                brr[k++]=arr[j++];
+                c=c+m-i+1;
+            }
+        }
+        while(i<=m){
+            brr[k++]=arr[i++];
+        }
+        while(j<=h){
+            brr[k++]=arr[j++];
+        }
+        for(int m=l; m<=h; m++)arr[m]=brr[m];
+    }
+    
+    void Sort(long long arr[], long long l, long long h, long long &c){
+        if(l<h){
+            int m=(l+h)/2;
+            Sort(arr, l, m,c);
+            Sort(arr, m+1, h,c);
+            
+            merge(arr, l, m, h,c);
+        }
+    }
+    
+    long long int inversionCount(long long arr[], long long  n)
+    {
+        // Your Code Here
+        long long int c=0;
+        Sort(arr, 0, n-1,c);
+        return c;
+    }
