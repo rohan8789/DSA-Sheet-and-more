@@ -1,0 +1,35 @@
+METHOD 01:-
+void binSort(int A[], int n)
+{
+    int c=0;
+    for(int i=0; i<n; i++)
+    {
+        if(A[i]==0)
+        {
+            c++;
+        }
+    }
+    for(int i=0; i<c; i++)
+    {
+        A[i]=0;
+    }
+    for(int i=c; i<n; i++)
+    {
+        A[i]=1;
+    }   
+}
+
+
+METHOD 02:-
+void binSort(int arr[], int n)
+{
+    int res=0;
+    for(int i=0; i<n; i++)
+    {
+        if(arr[i]==0)
+        {
+            swap(arr[res], arr[i]);
+            res++;
+        }
+    }
+}
