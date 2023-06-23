@@ -1,0 +1,22 @@
+class Solution
+{
+    public:
+    void insert(int *arr, int &i)
+    {
+        arr[i+1]=arr[i];
+    }
+     public:
+    
+    void insertionSort(int arr[], int n)
+    {
+        for(int i=1; i<n; i++){
+            int j=i-1;
+            int key=arr[i];
+            while(key<arr[j] && j>=0){
+                insert(arr, j);
+                j--;
+            }
+            arr[j+1]=key;
+        }
+    }
+};
