@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    /*You are required to complete this method*/
+    int max_path_sum(int arr[], int brr[], int l1, int l2)
+    {
+        int i=0, j=0, s1=0, s2=0, result=0;
+        while(i<l1 && j<l2){
+            if(arr[i]<brr[j]){
+                s1+=arr[i];
+                i++;
+            }else if(arr[i]>brr[j]){
+                s2+=brr[j];
+                j++;
+            }else{
+                result =result+ max(s1,s2) + arr[i];
+                i++;j++;
+                s1=0;
+                s2=0;
+            }
+        }
+        while(i<l1){
+            s1=s1+arr[i++];
+        }
+        while(j<l2){
+        // cout<<result<<" "<<arr[j]<<endl;
+            s2=s2+brr[j++];
+        }
+        result = result+max(s1,s2);
+        return result;
+    }
+};
