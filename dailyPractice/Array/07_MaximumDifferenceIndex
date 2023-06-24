@@ -1,0 +1,27 @@
+Input:
+N = 9
+A[] = {2, 1, 3, 4, 2, 1, 5, 1, 7}
+Output:
+6
+Explanation:
+For the above test case (Assuming 0-based indexing): 
+Number 1's first appearance is at index 1 and last appearance is at index 7. This implies gap is 7-1=6
+This is the maximum possible in the given test case.
+
+
+
+class Solution{
+    public:
+    int maxDiffIndex(int arr[], int n)
+    {
+        unordered_map<int,int>m;
+        int res=0;
+        for(int i=0; i<n; i++){
+            if(m.find(arr[i])!=m.end()){
+                res=max(res, i-m[arr[i]]);
+            }
+            m.insert({arr[i], i});
+        }
+        return res;
+    }
+};
