@@ -1,0 +1,18 @@
+class Solution{
+public:
+    typedef long long ll;
+    void Reverse(vector<ll>&arr, int l, int h){
+        while(l<=h){
+            swap(arr[l], arr[h]);
+            l++;h--;
+        }
+    }
+    void reverseInGroups(vector<long long>& arr, int n, int k){
+        int i=0;
+        while(i+k<n){
+            Reverse(arr, i, i+k-1);
+            i=i+k;
+        }
+        Reverse(arr, i, n-1);
+    }
+};
