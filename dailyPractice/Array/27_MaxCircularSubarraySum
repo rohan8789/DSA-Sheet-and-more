@@ -1,0 +1,32 @@
+class Solution{
+    public:
+    int maxSum(int arr[], int n)
+    {
+        int s=0,os=INT_MIN;
+        for(int i=0; i<n; i++)
+        {
+            s+=arr[i];
+            if(s>os){
+                os=s;
+            }
+            if(s<0){
+                s=0;
+            }
+        }
+        return os;
+    }
+    int circularSubarraySum(int arr[], int n){
+        
+        int ans=maxSum(arr, n);
+        if(ans<0)return ans;
+        int sum=0;
+        for(int i=0;i<n; i++){
+            sum+=arr[i];
+            arr[i]=-arr[i];
+        }
+         int res=sum+maxSum(arr,n);
+        int xxx=max(ans, res);
+       
+        return xxx;
+    }
+};
