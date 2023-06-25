@@ -29,6 +29,8 @@ Constraints:
 
 
 
+//Fails on >2 duplicates
+
 class Solution{
   public:
     vector<int> duplicates(int arr[], int n) {
@@ -50,6 +52,12 @@ class Solution{
         return v;
     }
 };
+
+
+
+
+
+
 
 //Multiple duplicates handled
 class Solution{
