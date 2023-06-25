@@ -13,7 +13,7 @@ Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
 
 
 
-
+//variable size Sliding Window problem
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
