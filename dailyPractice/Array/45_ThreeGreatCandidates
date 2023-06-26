@@ -1,0 +1,55 @@
+find the maximum collective ability from the given pool of candidates.
+Example 1:
+
+Input:
+N = 5
+Arr[] = {10, 3, 5, 6, 20}
+Output: 1200
+Explanation:
+Multiplication of 10, 6 and 20 is 1200.
+Example 2:
+
+Input:
+N = 5
+Arr[] = {-10, -3, -5, -6, -20}
+Output: -90
+Explanation:
+Multiplication of -3, -5 and -6 is -90.
+
+
+
+
+
+
+class Solution{   
+public:
+    typedef long long ll;
+    long long maxProduct(int arr[], int n) {
+        if(n<3)return -1;
+        //scan the array and compute max1,max2,max3
+        ll m1=INT_MIN,m2=INT_MIN,m3=INT_MIN;
+        for(int i=0; i<n; i++){
+            if(m1<arr[i]){
+                m3=m2;
+                m2=m1;
+                m1=arr[i];
+            }else if(m2<arr[i]){
+                m3=m2;
+                m2=arr[i];
+            }else if(m3<arr[i]){
+                m3=arr[i];
+            }
+        }
+        //scan the array and compute min and second min
+        ll m4=INT_MAX, m5=INT_MAX;
+        for(int i=0; i<n; i++){
+            if(m4>arr[i]){
+                m5=m4;
+                m4=arr[i];
+            }else if(m5>arr[i]){
+                m5=arr[i];
+            }
+        }
+        return max(m1*m2*m3,m1*m4*m5);
+    }
+};
