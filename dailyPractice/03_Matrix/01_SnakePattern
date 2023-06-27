@@ -1,1 +1,31 @@
+Input:
+N = 3 
+matrix[][] = {{45, 48, 54},
+             {21, 89, 87}
+             {70, 78, 15}}
+Output: 45 48 54 87 89 21 70 78 15 
 
+
+class Solution
+{   
+    public:
+    vector<int> snakePattern(vector<vector<int> > matrix)
+    {   
+        int n=matrix.size(),f=0;
+        vector<int>v;
+        for(int i=0; i<n; i++){
+            if(f==0){
+                for(int j=0; j<n; j++){
+                    v.push_back(matrix[i][j]);
+                }
+                f=1;
+            }else{
+                for(int j=n-1; j>=0; --j){
+                    v.push_back(matrix[i][j]);
+                }
+                f=0;
+            }
+        }
+        return v;
+    }
+};
