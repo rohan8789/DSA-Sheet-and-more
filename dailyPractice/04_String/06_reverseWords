@@ -1,0 +1,31 @@
+Input:
+S = i.like.this.program.very.much
+Output: much.very.program.this.like.i
+Explanation: After reversing the whole
+string(not individual words), the input
+string becomes
+much.very.program.this.like.i
+
+
+
+
+
+class Solution
+{
+    public:
+    string reverseWords(string S) 
+    { 
+        string x1="",x2="";
+        for(int i=S.length()-1; i>=0; i--){
+            if(S[i]=='.'){
+                x1=x1+S[i];
+                x2=x2+x1;
+                x1="";
+            }else{
+                x1=S[i]+x1;
+            }
+        }
+        x2=x2+x1;
+        return x2;
+    } 
+};
