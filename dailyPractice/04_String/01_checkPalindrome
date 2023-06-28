@@ -1,0 +1,12 @@
+class Solution{
+public:	
+	int isPalindrome(string S)
+	{
+	    int l=0, h=S.length()-1;
+	    while(l<=h){
+	        if(S[l]!=S[h])return false;
+	        l++;h--;
+	    }
+	    return true;
+	}
+};
