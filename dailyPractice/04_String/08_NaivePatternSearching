@@ -1,0 +1,24 @@
+
+abcxabcdabxabcdabcdabcy
+abcdabcy
+
+bool searchPattern(string str, string pat)
+{
+    int n=str.length();
+    int m=pat.length();
+    int j=0,f=0;
+    for(int i=0; i<n-m+1; i++){
+        int c=0;
+        for(int j=0; j<m; j++){
+            if(pat[j]==str[i+j]){
+                c++;
+            }else{
+                break;
+            }
+        }
+        if(c==m){
+            return true;
+        }
+    }
+    return false;
+}
