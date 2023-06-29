@@ -1,0 +1,36 @@
+Example 1:
+
+Input:
+S = "0100110101"
+Output: 4
+Explanation: 
+The required substrings are 01, 0011, 01 and 01.
+
+Example 2:
+
+Input:
+S = "0111100010"
+Output: 3
+
+
+
+
+class Solution {
+public:
+    int maxSubStr(string str){
+        int d=0,c=0;
+        for(int i=0; i<str.length(); i++){
+            if(str[i]=='0'){
+                c++;
+            }
+            else if(str[i]=='1'){
+                c--;
+            }
+            if(c==0){
+                d++;
+            }
+        }
+        if(c!=0)return -1;
+        return d;
+    }
+};
