@@ -1,0 +1,25 @@
+class Solution
+{
+  public:
+    string secFrequent (string arr[], int n)
+    {
+        unordered_map<string,int>m;
+        for(int i=0; i<n; i++){
+            m[arr[i]]++;
+        }
+        string ans="", ans1="";
+        int x=INT_MIN, y=INT_MIN;
+        for(auto i:m){
+            if(x<i.second){
+                y=x;
+                x=i.second;
+                ans1=ans;
+                ans=i.first;
+            }else if(x>i.second && y<i.second){
+                ans1=i.first;
+                y=i.second;
+            }
+        }
+        return ans1;
+    }
+};
