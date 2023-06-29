@@ -1,0 +1,28 @@
+class Solution
+{
+	public:
+		set<string> se;
+		
+		void permute(string s, int l, int h){
+		    if(l==h){
+		        se.insert(s);
+		    }
+		    for(int i=l; i<=h; i++){
+		        swap(s[l], s[i]);
+		        permute(s, l+1, h);
+		        swap(s[l], s[i]);
+		    }
+		}
+		
+		vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    permute(S, 0, S.length()-1);
+		    vector<string>v;
+		    for(auto i:se){
+		        v.push_back(i);
+		    }
+		    sort(v.begin(),v.end());
+		    return v;
+		}
+};
