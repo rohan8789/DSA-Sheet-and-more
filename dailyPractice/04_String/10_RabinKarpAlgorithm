@@ -1,0 +1,51 @@
+Input:
+S = "batmanandrobinarebat", pat = "bat"
+Output: 1 18
+Explanation: The string "bat" occurs twice
+in S, one starts are index 1 and the other
+at index 18. 
+
+
+
+class Solution
+{
+    public:
+        vector <int> search(string pat, string txt)
+        {
+            int m=pat.length(), n=txt.length();
+            long long d=256;//no of characters in string, 26 can also be used
+            long long q=1000000007;//should be prime and lasrge as possible
+            long long h=1; //save overflows
+            int ph=0,th=0;
+            for(int i=0; i<m-1; i++){
+                h=(h*d)%q;
+            }
+            for(int i=0; i<m; i++){
+                ph=(ph*d+(int)pat[i])%q;
+                th=(th*d+(int)txt[i])%q;
+            }
+            vector<int>v;
+           // cout<<h<<" "<<ph<<" "<<th<<endl;
+            for(int i=0; i<n-m+1; i++){
+                if(ph==th){
+                    int j;
+                    for(j=0; j<m; j++){
+                        if(pat[j]!=txt[i+j]){
+                            break;
+                        }
+                    }
+                    if(j==m){
+                        v.push_back(i+1);
+                    }
+                }
+                if(i<n-m){
+                    th=(d*(th-(int)txt[i]*h)+(int)txt[i+m])%q;
+                    if(th<0){
+                        th=th+q;
+                    }
+                }
+            }
+            if(v.size()==0)return {-1};
+            return v;
+        }
+};
