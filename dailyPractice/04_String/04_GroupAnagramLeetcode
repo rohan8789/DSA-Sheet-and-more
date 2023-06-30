@@ -1,1 +1,35 @@
+Input:
+N = 5
+words[] = {act,god,cat,dog,tac}
+Output:
+act cat tac 
+god dog
+Explanation:
+There are 2 groups of
+anagrams "god", "dog" make group 1.
+"act", "cat", "tac" make group 2.
 
+
+
+//GFG
+class Solution{
+  public:
+    vector<vector<string> > Anagrams(vector<string>& str) {
+        int n=str.size();
+        vector<vector<string>>v;
+        unordered_map<string, vector<string>>m;
+        for(int i=0; i<n; i++){
+            string s=str[i];
+            sort(s.begin(), s.end());
+            m[s].push_back(str[i]);
+        }
+        for(auto i:m){
+            vector<string>vec;
+            for(auto j:i.second){
+                vec.push_back(j);
+            }
+            v.push_back(vec);
+        }
+        return v;
+    }
+};
