@@ -1,0 +1,107 @@
+class Node{
+    public:
+    int val;
+    Node *next;
+    Node(){
+        val=0;
+        next=NULL;
+    }
+};
+
+
+class MyLinkedList {
+public:
+    Node* head;
+    int size=0;
+    MyLinkedList() {
+        head=NULL;
+        size=0;
+    }
+    
+    int get(int index) {
+        if(index<0||index>size)return -1;
+        int i=0;
+        Node* temp=head; 
+        
+        while(i<index){
+            temp=temp->next;
+            i++;
+        }
+        if(temp!=NULL)return temp->val;
+        return -1;
+    }
+    
+    void addAtHead(int val) {
+        Node* freshNode = new Node();
+        freshNode->val=val;
+        if(head==NULL){
+            head=freshNode;
+        }else{
+            freshNode->next=head;
+            head=freshNode;
+        }
+        size++;
+    }
+    
+    void addAtTail(int val) {
+        Node* freshNode = new Node();
+        Node* tail=head;
+        freshNode->val=val;
+        if(head==NULL){
+            head=freshNode;
+            tail=freshNode;
+        }else{
+                
+            while(tail->next!=NULL){
+                tail=tail->next;
+            }
+            tail->next=freshNode;
+        }
+        size++;
+
+    }
+    
+    void addAtIndex(int index, int val) {
+        if(index<0||index>size)return;
+        Node* temp=head;
+        Node* freshNode=new Node();
+        freshNode->val=val;
+        int i=0;
+        if(index==0){
+            freshNode->next=head;
+            head=freshNode;
+            size++;
+            return;
+        }
+        
+        while(i<index-1){
+            temp=temp->next;
+            i++;
+        }
+        Node* a=temp->next;
+        temp->next=freshNode;
+        freshNode->next=a;
+        size++;
+    }
+    
+    void deleteAtIndex(int index) {
+        if(index<0||index>=size)return;
+        int i=0;
+        if(index==0){
+            Node* a=head;
+            head=head->next;
+            delete(a);
+            size--;
+            return;
+        }
+        Node* temp=head;
+        while(i<index-1){
+            temp=temp->next;
+            i++;
+        }
+        Node *a=temp->next;
+        temp->next=a->next;
+        delete(a);
+        size--;
+    }
+};
