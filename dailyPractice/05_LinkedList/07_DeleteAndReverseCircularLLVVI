@@ -65,3 +65,25 @@ void deleteNode(struct Node **head, int key)
     temp->next=prev; 
     *head=prev;
 }
+
+
+
+//Another way to delete
+
+void deleteNode(struct Node **head, int key)
+{
+    if(*head==NULL)return;
+    int f=0;
+    if((*head)->data==key){f=1;}
+    Node* temp=*head;
+    while(temp->next->data!=key){
+        temp=temp->next;
+    }
+    
+    Node* a= temp->next;
+    temp->next=a->next;
+    delete(a);
+    if(f==1){
+        *head=a->next;
+    }
+}
