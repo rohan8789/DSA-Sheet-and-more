@@ -1,0 +1,32 @@
+5 5
+23 89 50 30 72
+23
+
+5 9
+23 89 50 30 72
+-1
+
+
+
+
+
+class Solution{
+public:
+    int getNthFromLast(Node *head, int n)
+    {
+        int c=1;
+        Node* first=head;
+        while(c<n&&first!=NULL){
+            first=first->next;
+            c++;
+        }
+        
+        if(first==NULL)return -1;
+        Node* second=head;
+        while(first->next!=NULL){
+            first=first->next;
+            second=second->next;
+        }
+        return second->data;
+    }
+};
