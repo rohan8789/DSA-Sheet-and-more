@@ -1,1 +1,41 @@
+class Solution{
+    public:
+    int getMiddle(Node *head)
+    {
+        Node* slow=head, *fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow->data;
+    }
+};
+
+
+
+
+
+
+
+
+class Solution{
+    public:
+    int getMiddle(Node *head)
+    {
+        if(head==NULL)return NULL;
+        if(head->next==NULL)return head->data;
+        Node* slow=head;
+        Node* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        if(fast->next!=NULL&&fast->next->next==NULL){
+            return slow->next->data;
+        }
+        return slow->data;
+    }
+};
+
+
 
