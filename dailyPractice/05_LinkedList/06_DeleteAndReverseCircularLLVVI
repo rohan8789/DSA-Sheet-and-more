@@ -1,0 +1,48 @@
+void deleteNode(struct Node **head, int key)
+{
+    if(*head==NULL)return;
+    Node* temp=*head, *prev=NULL;
+    if((*head)->data==key){
+        temp=temp->next;
+        while(temp->next!=*head){
+            temp=temp->next;
+        }
+        Node* a=(*head);
+        (*head)=(*head)->next;
+        temp->next=(*head);
+        delete(a);
+        return;
+    }
+    prev=temp;
+    temp=temp->next;
+    while(temp!=*head){
+        if(key==temp->data)break;
+        prev=temp;
+        temp=temp->next;
+    }
+    
+    Node* a= prev->next;
+    prev->next=a->next;
+    delete(a);
+}
+
+
+ void reverse(struct Node** head)
+{
+    if(*head==NULL||(*head)->next==NULL)return;
+    Node* prev=NULL;
+    Node* temp=*head;
+    int f=0;
+    while(true){
+        if(f==1&&temp==*head)break; //because initially temp==head so we cant keep temp!=head as condition
+        f=1;
+        Node* a=temp->next;
+        temp->next=prev;
+        prev=temp;
+        temp=a;
+    }
+    //temp->next=prev; //temp and head are same here.
+    //but updating temp won't update head pointer
+    (*head)->next=prev;
+    *head=prev;
+}
