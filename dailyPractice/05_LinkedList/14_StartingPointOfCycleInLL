@@ -1,0 +1,54 @@
+method 01:- floyd cycle detection. constant space
+
+Intuition:-
+find at which node slow and fast pointer meets. when they meet
+make slow point to head and run a loop while slow!=fast then return slow/fast ptr
+else return NULL;
+
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL)return NULL;
+        ListNode* slow=head, *fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                slow=head;
+                while(slow!=fast){
+                    slow=slow->next;
+                    fast=fast->next;
+                }
+                return slow;
+            }
+        }
+        return NULL;
+
+    }
+};
+
+
+
+
+method 02: Using Space
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL)return NULL;
+        unordered_map<ListNode*, int>m;
+        ListNode* temp=head, *x=NULL;
+        
+        int i=1;
+        while(temp->next!=NULL){
+            if(m.find(temp)!=m.end()){
+                x=temp;
+                break;
+            }
+            m.insert({temp, i});
+            i++;
+            temp=temp->next;
+        }
+        return x;
+    }
+};
