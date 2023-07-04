@@ -1,0 +1,76 @@
+10
+1 1 1 2 3 3 3 4 4 4
+
+//Most better way with handled memory leaks
+Node *removeDuplicates(Node *head)
+{
+    Node* temp=head;
+    while(temp!=NULL&&temp->next!=NULL){
+        if(temp->data==temp->next->data){
+            Node* a= temp->next;
+            temp->next=temp->next->next;
+            delete(a);
+        }else{
+            temp=temp->next;
+        }
+    }
+    return head;
+}
+
+
+
+
+
+
+
+
+
+Node *removeDuplicates(Node *head)
+{
+    Node* temp=head, *prev=NULL;
+    int f=0;
+    while(temp->next!=NULL){
+        prev=temp;
+        temp=temp->next;
+        while(prev->data==temp->data&&temp->next!=NULL){
+            temp=temp->next;
+            f=1;
+        }
+        if(prev->data==temp->data && temp->next==NULL){
+            prev->next=NULL;break;
+        }
+        if(f==1){
+            prev->next=temp;
+            f=0;
+        }
+        
+    }
+    return head;
+}
+
+
+
+
+Node *removeDuplicates(Node *head)
+{
+    Node* temp=head, *prev=head;
+    int f=0;
+    while(temp->next!=NULL){
+        
+        if(temp->data!=temp->next->data){
+            temp=temp->next;
+            if(f==1){
+                prev->next=temp;
+                f=0;
+            }
+            prev=temp;
+        }else{
+            temp=temp->next;
+            f=1;
+        }
+    }
+    if(f==1){
+        prev->next=NULL;
+    }
+    return head;
+}
