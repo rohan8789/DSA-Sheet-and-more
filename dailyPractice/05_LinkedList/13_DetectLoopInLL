@@ -1,0 +1,45 @@
+Method 01: Hashing
+The idea is to insert the nodes in the hashmap and whenever a node is encountered that is already present in the hashmap then return true.
+
+
+
+Method 02:- using slow and fast pointers
+The reason for this is that the fast pointer moves twice as fast as the slow pointer, so it will cover the loop length at a faster rate. 
+Eventually, the fast pointer will "lap" the slow pointer and meet it at some point within the cycle.
+
+class Solution
+{
+    public:
+    bool detectLoop(Node* head)
+    {
+        Node* slow =head;
+        Node* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast)return true;
+        }
+        return false;
+    }
+};
+
+
+
+Method 03:- Modifying Node value
+bool detectLoop(Node* head)
+{
+    if (!head)
+        return 0;
+    else {
+        while (head) {
+            // If loop found
+            if (head->key == -1) {
+                return true;
+            }
+            else {
+                head->key = -1;
+                head = head->next;
+            }
+        }
+        return 0;
+    }
