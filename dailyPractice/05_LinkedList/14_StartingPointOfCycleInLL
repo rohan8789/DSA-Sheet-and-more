@@ -31,7 +31,7 @@ public:
 
 
 
-method 02: Using Space
+method 02: Using Space map or set
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
@@ -50,5 +50,27 @@ public:
             temp=temp->next;
         }
         return x;
+    }
+};
+
+
+
+
+gfg
+class Solution
+{
+    public:
+    int findFirstNode(Node* head)
+    {
+        unordered_set<Node*>s;
+        Node* temp=head;
+        while(temp!=NULL){
+            if(s.find(temp)!=s.end()){
+                return temp->data;
+            }
+            s.insert(temp);
+            temp=temp->next;
+        }
+        return -1;
     }
 };
