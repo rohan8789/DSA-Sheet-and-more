@@ -1,1 +1,39 @@
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+//check corner cases
 
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL)return NULL;
+        else if(head->next==NULL && n==1){
+            delete(head);
+            return NULL;
+        }
+        ListNode* first=head;
+        int i=0;
+        while(i<n && first!=NULL){
+            i++;
+            first=first->next;
+        }
+        if(i==n && first==NULL){
+            ListNode* temp=head;
+            head=head->next;
+            delete(temp);
+            return head;
+        }
+        if(first==NULL)return NULL;
+        ListNode* second=head;
+        while(first->next!=NULL){
+            second=second->next;
+            first=first->next;
+        }
+        if(first->next==NULL){
+            ListNode* a=second->next;
+            second->next=a->next;
+            delete(a);
+            return head;
+        }
+        return head;
+    }
+};
