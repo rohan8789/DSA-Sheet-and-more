@@ -64,3 +64,36 @@ class Solution
         return aa;
     }
 };
+
+
+
+best optimal Solution
+
+class Solution
+{
+    public:
+    struct node *reverse (struct node *head, int k)
+    { 
+        node* temp=head, *prevFirst=NULL;
+        int f=0;
+        while(temp!=NULL){
+            node* first=temp, *prev=NULL;
+            int i=0;
+            while(i<k && temp!=NULL){
+                node* a=temp->next;
+                temp->next=prev;
+                prev=temp;
+                temp=a;
+                i++;
+            }
+            if(f==0){
+                head=prev;
+                f=1;
+            }else{
+                prevFirst->next=prev;
+            }
+            prevFirst=first;
+        }
+        return head;
+    }
+};
