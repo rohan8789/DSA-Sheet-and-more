@@ -1,0 +1,66 @@
+//check for even odd input
+
+Intuition:-
+1. find count of LL
+2. i=0, k=4(given), n=8(given);
+3. loop i+k<=n
+4. reverse(temp, i, i+k)
+5. add reversed LL to ans LL.
+6. Since head pointer would be lost in each iteration, save the starting point of next kth group of the LL before calling the reverse say in var temp2;
+7. then do temp=temp2;
+
+
+
+
+class Solution
+{
+    public:
+    int count(node* head){
+        int c=0;
+        while(head!=NULL){
+            head=head->next;
+            c++;
+        }
+        return c;
+    }
+    node* Reverse(node* head, int i, int k){
+        node* temp=head, *prev=NULL;
+        while(i<k&&temp!=NULL){
+            node* a = temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=a;
+            i++;
+        }
+        return prev;
+    }
+    
+    struct node *reverse (struct node *head, int k)
+    { 
+        if(head==NULL || head->next==NULL)return head;
+        int n=count(head);
+        node* temp=head, *temp2=head;
+        node* ans= new node(-1);
+        node* aa=ans;
+        int i=0, j;
+        while(i+k<=n){
+            j=0;
+            while(j<k && temp2!=NULL){
+                temp2=temp2->next;
+                j++;
+            }
+            node* a=Reverse(temp, i, i+k);
+            ans->next=a;
+            while(ans->next!=NULL){
+                ans=ans->next;
+            }
+            i=i+k;
+            temp=temp2;
+            
+        }
+        node* a=Reverse(temp, i, i+k);
+        ans->next=a;
+        aa=aa->next;
+        return aa;
+    }
+};
