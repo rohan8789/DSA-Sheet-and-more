@@ -1,0 +1,49 @@
+Example 1:
+
+Input:
+L1 = 9->6->4->2->3->8
+L2 = 1->2->8->6->2
+Output: 
+1 2 3 4 6 8 9
+Explaination: 
+All the distinct numbers from two lists, when sorted forms the list in the output. 
+Example 2:
+
+Input:
+L1 = 1->5->1->2->2->5
+L2 = 4->5->6->7->1
+Output: 
+1 2 4 5 6 7
+Explaination: 
+All the distinct numbers from two lists, when sorted forms the list in the output.
+
+Most Efficient Solution:- 
+Step 1: - Merge the given two lists.
+Step 2: - Sort the merged List
+Step 3: - Remove Duplicate elements from the final List.
+
+class Solution
+{
+    public:
+    struct Node* makeUnion(struct Node* head1, struct Node* head2)
+    {
+        // code here
+        set<int>s;
+        while(head1!=NULL){
+            s.insert(head1->data);
+            head1=head1->next;
+        }
+        while(head2!=NULL){
+            s.insert(head2->data);
+            head2=head2->next;
+        }
+        Node *temp=new Node(-1);
+        Node *ans=temp;
+        for(auto i:s){
+            temp->next = new Node(i);
+            temp=temp->next;
+        }
+        ans=ans->next;
+        return ans;
+    }
+};
