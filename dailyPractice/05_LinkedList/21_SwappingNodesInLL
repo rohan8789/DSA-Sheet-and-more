@@ -1,0 +1,103 @@
+
+
+
+
+class Solution {
+public:
+    
+    int count(ListNode *head){
+        int c=0;
+        while(head!=NULL){
+            c++;
+            head=head->next;
+        }
+        return c;
+    }
+    
+    ListNode* swapNodes(ListNode* head, int k) {
+        int n=count(head);
+        ListNode *temp1=head, *temp2=head;
+        ListNode *prev1=NULL, *prev2=NULL;
+        int i=1;
+        while(i<k){
+            prev1=temp1;
+            temp1=temp1->next;
+            i++;
+        }
+        i=1;
+        while(i<n-k+1){
+            prev2=temp2;
+            temp2=temp2->next;
+            i++;
+        }
+        if(prev1!=NULL){
+            prev1->next=temp2;
+        }
+        if(prev2!=NULL){
+            prev2->next=temp1;
+        }
+        ListNode *a=temp1->next;
+        temp1->next=temp2->next;
+        temp2->next=a;
+        if(k==1){
+            head=temp2;
+        }
+        if(k==n){
+            head=temp1;
+        }
+        return head;
+    }
+};
+
+
+
+
+
+
+
+class Solution {
+public:
+
+    int count(ListNode* head){
+        int i=0;
+        while(head!=NULL){
+            head=head->next;
+            i++;
+        }
+        return i;
+    }
+
+    ListNode* swapNodes(ListNode* head, int k) {
+        int n=count(head);
+        ListNode* first=head, *prev1=NULL;
+        ListNode* second=head, *prev2=NULL;
+        int i=1;
+        while(i<k && first!=NULL){
+            prev1=first;
+            first=first->next;
+            i++;
+        }
+        i=1;
+        while(i<n-k+1 && second!=NULL){
+            prev2=second;
+            second=second->next;
+            i++;
+        }
+    
+        if(prev1==NULL){
+            head=second;
+        }else{
+            prev1->next=second;
+        }
+        if(prev2==NULL){
+            head=first;
+        }else{
+            prev2->next=first;
+        }
+
+        ListNode* a=first->next;
+        first->next=second->next;
+        second->next=a;
+        return head;    
+    }
+};
