@@ -1,1 +1,22 @@
+4
+10 20 30 40
+30
 
+--- 10 20 40
+
+
+class Solution
+{
+    public:
+    void deleteNode(Node *del)
+    {
+       Node* prev=NULL;
+       while(del->next!=NULL){
+           del->data=del->next->data;
+           prev=del;
+           del=del->next;
+       }
+       prev->next=NULL;
+    }
+
+};
