@@ -1,1 +1,81 @@
+Leetcode Problem
+Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+Output: Intersected at '8'
 
+Input: intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+Output: Intersected at '2'
+
+
+
+
+class Solution {
+public:
+
+    int count(ListNode* head){
+        int i=0;
+        while(head!=NULL){
+            i++;
+            head=head->next;
+        }
+        return i;
+    }
+
+    ListNode *getIntersectionNode(ListNode *head1, ListNode *head2) {
+        int n=count(head1);
+        int m=count(head2);
+        int z=abs(n-m);
+        if(n>m){
+            while(z--){
+                head1=head1->next;
+            }
+        }else if(m>n){
+            while(z--){
+                head2=head2->next;
+            }
+        }
+        while(head1!=NULL && head2!=NULL){
+            if(head1==head2 && head1->val==head2->val){
+                return head1;
+            }
+            head1=head1->next;    
+            head2=head2->next;
+        }
+        return NULL;
+    }
+};
+
+
+
+
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* left=headA, *right=headB;
+        int c=0,d=0;
+        while(left!=NULL){
+            c++;
+            left=left->next;
+        }
+        while(right!=NULL){
+            d++;
+            right=right->next;
+        }
+        int x=abs(c-d);
+        if(c<d){
+            while(x--){
+                headB=headB->next;
+            }
+        }else{
+            while(x--){
+                headA=headA->next;
+            }
+        }
+        while(headA!=headB){
+            headA=headA->next;
+            headB=headB->next;
+        }
+        if(headA==headB)return headA;
+        return NULL;
+    }
+};
