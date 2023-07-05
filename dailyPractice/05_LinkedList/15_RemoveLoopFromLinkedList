@@ -1,0 +1,58 @@
+method 01:- O(n) time O(n) space.
+using floyd cycle and unordered_set or map.
+class Solution
+{
+    public:
+    void removeLoop(Node* head)
+    {
+        if(head==NULL)return;
+        Node* prev=NULL;
+        Node* slow=head, *fast=head;
+        unordered_map<Node*, int>m;
+        while(fast!=NULL && fast->next!=NULL){
+            prev=slow;
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                slow=head;
+                while(true){
+                    if(m.find(slow)!=m.end()){
+                        prev->next=NULL;
+                        break;
+                    }
+                    m.insert({slow, 1});
+                    prev=slow;
+                    slow=slow->next;
+                }
+            }
+        }
+    }
+};
+
+
+method 02:- O(n) time and constant space;
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        if(head==NULL)return;
+        Node* prev=NULL;
+        Node* slow=head, *fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            prev=slow;
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                slow=head;
+                while(slow!=fast){
+                    slow=slow->next;
+                    prev=fast;
+                    fast=fast->next;
+                }
+                prev->next=NULL;
+            }
+        }
+    }
+};
