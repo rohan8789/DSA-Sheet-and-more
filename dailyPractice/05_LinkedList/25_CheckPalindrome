@@ -4,8 +4,6 @@
 
 
 
-
-
 class Solution{
   public:
     Node* findMid(Node* head){
@@ -43,6 +41,47 @@ class Solution{
             if(res->data!=temp->data)return false;
             res=res->next;
             temp=temp->next;
+        }
+        return true;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head==NULL||head->next==NULL)return true;
+        ListNode* temp=head, *prev=NULL;
+        ListNode* ans=new ListNode(-1);
+        ListNode* aa=ans;
+        
+        while(temp!=NULL){
+            ans->next=new ListNode(temp->val);
+            ListNode* a=temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=a;
+            ans=ans->next;
+        }
+        aa=aa->next;
+        while(aa!=NULL){
+            if(prev->val!=aa->val)return false;
+            prev=prev->next;
+            aa=aa->next;
         }
         return true;
     }
