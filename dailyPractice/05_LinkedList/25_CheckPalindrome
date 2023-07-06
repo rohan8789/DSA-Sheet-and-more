@@ -1,0 +1,49 @@
+//check for even and odd length Palindrome both
+
+
+
+
+
+
+
+class Solution{
+  public:
+    Node* findMid(Node* head){
+        Node* slow=head, *fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        if(fast==NULL)return slow;
+        return slow->next;
+    }
+    
+    Node* Reverse(Node *head){
+        Node *prev=NULL;
+        while(head!=NULL){
+            Node *a=head->next;
+            head->next=prev;
+            prev=head;
+            head=a;
+        }
+        return prev;
+    }
+    
+    bool isPalindrome(Node *head)
+    {
+        if(head->next==NULL)return true;
+        if(head->next->next==NULL){
+            if(head->data==head->next->data)return true;
+            return false;
+        }
+        Node* ans=findMid(head);
+        Node* temp=Reverse(ans);
+        Node* res=head;
+        while(temp!=NULL){
+            if(res->data!=temp->data)return false;
+            res=res->next;
+            temp=temp->next;
+        }
+        return true;
+    }
+};
