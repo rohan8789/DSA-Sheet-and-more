@@ -1,57 +1,20 @@
-Example 1:
-
-Input: 
-N = 7
-Link List:
-17 -> 15 -> 8 -> 9 -> 2 -> 4 -> 6 -> NULL
-
-Output: 8 2 4 6 17 15 9
-
-Explaination: 8,2,4,6 are the even numbers 
-so they appear first and 17,15,9 are odd 
-numbers that appear later.
-
-Example 2:
-
-Input:
-N = 4
-Link List:
-1 -> 3 -> 5 -> 7
-
-Output: 1 3 5 7
-
-Explaination: There is no even number. 
-So ne need for modification.
-
-
-
-
-class Solution{
-public:
-    Node* divide(int N, Node *head){
+class Solution
+{
+    public:
+    Node* pairWiseSwap(struct Node* head) 
+    {
+        if(head==NULL||head->next==NULL)return head;
         Node* temp=head;
-        Node* even = new Node(-1);
-        Node* ee=even;
-        Node* odd=new Node(-1);
-        Node* oo=odd;
-        while(temp!=NULL){
-            if(temp->data%2==0){
-                even->next=temp;
-                even=even->next;
-            }else{
-                odd->next=temp;
-                odd=odd->next;
-            }
+        Node* dummy =new Node(-1);
+        Node* ans1=dummy;
+        while(temp!=NULL && temp->next!=NULL){
+            Node* ans=temp->next;
+            temp->next=temp->next->next;
+            dummy->next=ans;
+            dummy->next->next=temp;
+            dummy=dummy->next->next;
             temp=temp->next;
         }
-        even->next=NULL;
-        odd->next=NULL;
-        ee=ee->next;
-        oo=oo->next;
-        if(even->data==-1){
-            return oo;
-        }
-        even->next=oo;
-        return ee;
+        return ans1->next;
     }
 };
