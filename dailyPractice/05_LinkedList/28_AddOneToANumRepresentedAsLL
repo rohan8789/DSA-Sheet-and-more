@@ -1,0 +1,43 @@
+456------>457
+999------>1000
+
+
+
+
+
+class Solution
+{
+    public:
+    Node* Reverse(Node* ans){
+        Node* prev=NULL;
+        while(ans!=NULL){
+            Node* a=ans->next;
+            ans->next=prev;
+            prev=ans;
+            ans=a;
+        }
+        return prev;
+    }
+    
+    Node* addOne(Node *head) 
+    {
+        head=Reverse(head);
+        Node* temp=head, *prev;
+        int carry=0, f=0;
+        while(temp!=NULL){
+            temp->data+=1;
+            if(temp->data<10){
+                f=1;
+                break;
+            }
+            temp->data=temp->data%10;
+            prev=temp;
+            temp=temp->next;
+        }
+        if(f==0){
+            prev->next = new Node(1);
+        }
+        head=Reverse(head);
+        return head;
+    }
+};
