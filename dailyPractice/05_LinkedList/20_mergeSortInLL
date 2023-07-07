@@ -1,1 +1,56 @@
 
+class Solution {
+public:
+
+    ListNode* findMid(ListNode* head){
+        ListNode* slow=head, *fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+           if(fast->next->next==NULL)return slow;
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+    }
+
+    ListNode* merge(ListNode* left, ListNode* right){
+        if(left==NULL)return right;
+        if(right==NULL)return left;
+        ListNode* ans=new ListNode(-1);
+        ListNode* a=ans;
+        while(left!=NULL && right!=NULL){
+            if(left->val<=right->val){
+                ans->next=left;
+                left=left->next;
+            }else{
+                ans->next=right;
+                right=right->next;
+            }
+            ans=ans->next;
+        }
+        while(left!=NULL){
+            ans->next=left;
+            left=left->next;
+            ans=ans->next;
+        }
+        while(right!=NULL){
+            ans->next=right;
+            right=right->next;
+            ans=ans->next;
+        }
+        a=a->next;
+        return a;
+    }
+
+    ListNode* sortList(ListNode* head) {
+        if(head==NULL||head->next==NULL)return head;
+        ListNode* mid=findMid(head);
+        ListNode* left=head;
+        ListNode* right=mid->next;
+        mid->next=NULL;
+        left=sortList(left);
+        right=sortList(right);
+
+        ListNode* ans=merge(left, right);
+        return ans;
+    }
+};
