@@ -1,1 +1,42 @@
 
+class Solution{
+  public:
+    Node* merge(Node* temp1, Node* temp2){
+        Node* ans=new Node(-1);
+        Node* a=ans;
+        while(temp1!=NULL && temp2!=NULL){
+            if(temp1->data<=temp2->data){
+                ans->next=temp1;
+                temp1=temp1->next;
+            }else{
+                ans->next=temp2;
+                temp2=temp2->next;
+            }
+            ans=ans->next;
+        }
+        while(temp1!=NULL){
+            ans->next=temp1;
+            temp1=temp1->next;
+            ans=ans->next;
+        }
+        while(temp2!=NULL){
+            ans->next=temp2;
+            temp2=temp2->next;
+            ans=ans->next;
+        }
+        return a->next;
+    }
+    
+    Node * mergeKLists(Node *arr[], int k)
+    {
+        if(arr[0]==NULL)return NULL;
+        Node* temp=new Node(-1);
+        Node* head=temp;
+        int i=0;
+        while(i<k){
+            temp=merge(temp, arr[i]);
+            i++;
+        }
+        return head->next;
+    }
+};
