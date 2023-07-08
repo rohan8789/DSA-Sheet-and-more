@@ -1,0 +1,28 @@
+Input:-
+7 17
+9 8 6 5 4 2 1
+output :-
+2
+
+
+int countTriplets(struct Node* head, int x) 
+{ 
+    if(head==NULL||head->next==NULL||head->next->next==NULL)return 0;
+    Node* first=head;
+    int c=0;
+    while(first->next->next!=NULL){
+        unordered_set<int>s;
+        Node* second=first->next;
+        int sum=x-first->data;
+        while(second!=NULL){
+            if(second->data>=sum)break;
+            if(s.find(sum-second->data)!=s.end()){
+                c++;
+            }
+            s.insert(second->data);
+            second=second->next;
+        }
+        first=first->next;
+    }
+    return c;
+} 
