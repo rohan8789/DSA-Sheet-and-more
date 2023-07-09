@@ -1,1 +1,20 @@
+#include <bits/stdc++.h> 
+using namespace std;
 
+DLLNode* rotateDLL(DLLNode* head, int k) 
+{
+	DLLNode* temp=head, *prev=head;
+	int i=1;
+	while(i<=k){
+		prev=temp;
+		temp=temp->next;
+		i++;
+	}
+	prev->next=NULL;
+	DLLNode* ans=temp;
+	while(temp->next!=NULL){
+		temp=temp->next;
+	}
+	temp->next=head;
+	return ans;
+}
