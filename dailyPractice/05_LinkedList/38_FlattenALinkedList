@@ -1,1 +1,43 @@
+Node* merge(Node* head1, Node* head2){
+    if(head1==NULL)return head2;
+    if(head2==NULL)return head1;
+    Node* ans=new Node(-1);
+    Node* a=ans;
+    while(head1!=NULL && head2!=NULL){
+        if(head1->data<=head2->data){
+            ans->bottom=new Node(head1->data);
+            head1=head1->bottom;
+        }
+        else{
+            ans->bottom=new Node(head2->data);
+            head2=head2->bottom;
+        }
+        ans=ans->bottom;
+    }
+    while(head1!=NULL){
+        ans->bottom=new Node(head1->data);
+        head1=head1->bottom;
+        ans=ans->bottom;
+    }
+    while(head2!=NULL){
+        ans->bottom=new Node(head2->data);
+        head2=head2->bottom;
+        ans=ans->bottom;
+    }
+    return a->bottom;
+}
 
+Node *flatten(Node *head)
+{
+    Node* temp=head;
+    Node* ans=new Node(-1);
+    Node* a;
+    int c=0;
+    while(temp!=NULL){
+        Node* first=temp;
+        ans=merge(ans, temp);
+        a=ans;
+        temp=temp->next;
+    }
+    return a->bottom;
+}
