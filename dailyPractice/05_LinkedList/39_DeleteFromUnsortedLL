@@ -1,0 +1,22 @@
+class Solution
+{
+    public:
+    Node * removeDuplicates( Node *head) 
+    {
+        if(head==NULL||head->next==NULL)return head;
+        Node* temp=head;
+        unordered_map<int,int>m;
+        m.insert({temp->data, 1});
+        while(temp->next!=NULL){
+            if(m.find(temp->next->data)!=m.end()){
+                Node* a=temp->next;
+                temp->next=temp->next->next;
+                delete(a);
+            }else{
+                m.insert({temp->next->data,1});
+                temp=temp->next;
+            }
+        }
+        return head;
+    }
+};
