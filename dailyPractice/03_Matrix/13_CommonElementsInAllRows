@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool check(vector<int>&visited, int x){
+    if(visited[x]==1){
+        visited[x]=0;
+        return true;
+    }
+    return 0;
+}
+
+
+vector<int> findCommonElements(vector<vector<int>> &mat)
+{
+    unordered_map<int,int>m;
+    for(int i=0; i<mat[0].size(); i++){
+        m.insert({mat[0][i], 1});
+    }
+    for(int i=1; i<mat.size(); i++){
+        vector<int>visited(10000, 1);
+        for(int j=0; j<mat[i].size(); j++){
+            if(m.find(mat[i][j])!=m.end()){
+                if(check(visited, mat[i][j])){
+                    m[mat[i][j]]++;
+                }
+            }
+        }
+    }
+
+    vector<int>v;
+    for(auto i:m){
+        if(i.second==mat.size()){
+            v.push_back(i.first);
+        }
+    }
+    return v;
+}
