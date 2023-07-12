@@ -1,0 +1,43 @@
+Idea is to first push the given element(x) to queue. then, add front element of the queue to back of the queue while q.fronf()!=x 
+This gives a reversed form of the queue which we can use as a stack
+
+
+
+
+
+
+
+class MyStack {
+public:
+    queue<pair<int,int>>q;
+    int i;
+    MyStack() {
+        i=0;
+    }
+    
+    void push(int x) {
+        q.push({x, i});
+        while(true){
+            if(q.front().first==x && q.front().second==i)break;
+            q.push(q.front());
+            q.pop();
+        }
+        i++;
+    }
+    
+    int pop() {
+        if(!q.size())return -1;
+        int x=q.front().first;
+        q.pop();
+        return x;
+    }
+    
+    int top() {
+        if(!q.size())return -1;
+        return q.front().first;
+    }
+    
+    bool empty() {
+        return q.size()==0;
+    }
+};
