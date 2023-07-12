@@ -1,0 +1,35 @@
+class Solution{
+    stack<int> s;
+    int size;
+    int *minEle;
+    public:
+        Solution(){
+           minEle = new int[100];
+           size=0;
+        }
+        int getMin(){
+            if(size==0)return -1;
+            int x=minEle[size-1];
+            return x;
+        }
+       
+        int pop(){
+            if(s.size()==0)return -1;
+            int x=s.top();
+            if(s.top()==minEle[size-1]){
+                size--;
+            }
+            s.pop();
+            return x;
+        }
+       
+        void push(int x){
+            s.push(x);
+            if(size==0){
+                minEle[size++]=x;
+            }else if(minEle[size-1]>=x){
+                minEle[size]=x;
+                size++;
+            }
+        }
+};
