@@ -6,6 +6,38 @@ Output:
 
 stack<int> _push(int arr[],int n)
 {
+    stack<int> s;
+    s.push(arr[0]);
+    int m=INT_MAX;
+    for(int i=1; i<n; i++){
+        if(s.top()>=arr[i]){
+            s.push(arr[i]);
+        }else{
+            s.push(s.top());
+        }
+    }
+    return s;
+}
+
+void _getMinAtPop(stack<int>s)
+{
+    while(!s.empty()){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+stack<int> _push(int arr[],int n)
+{
     stack<int> s1,s2;
     int m=INT_MAX;
     for(int i=0; i<n; i++){
