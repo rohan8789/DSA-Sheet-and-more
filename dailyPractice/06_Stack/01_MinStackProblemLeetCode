@@ -1,0 +1,70 @@
+Using array:- getMin is O(n), we get achieve O(1) space by using extra array and maintaining current all minimums in that extra array;
+class CustomStack {
+public:
+    int *arr;
+    int capacity;
+    int size;
+    CustomStack(int maxSize) {
+        capacity=maxSize;
+        arr = new int[capacity];
+        size=0;
+    }
+    
+    void push(int x) {
+        if(size>=capacity)return;
+        arr[size]=x;
+        size++;
+    }
+    
+    int pop() {
+        if(size<=0||size>capacity)return -1;
+        size--;
+        int x=arr[size];
+        return x;  
+    }
+    
+    void increment(int k, int val) {
+        if(size<0||size>capacity)return;
+        if(k>size){
+            k=size;
+        }
+        for(int i=0; i<k; i++){
+            arr[i]=arr[i]+val;
+        }
+    }
+};
+
+
+
+
+Using Two Stack:- All operation in O(1). but Using stack for solving stack is not a good idea at interview. you should use any other data structure like
+                  array, vector or linked list;
+class MinStack {
+public:
+    stack<int>s1;
+    stack<int>s2;
+    int m=LONG_MAX;
+    void push(int val) {
+        if(s2.empty() || s2.top()>=val){
+            s2.push(val);
+        }
+        s1.push(val);
+    }
+    
+    void pop() {
+        if(s2.top()==s1.top()){
+            s2.pop();
+        }
+        s1.pop();
+    }
+    
+    int top() {
+        if(!s1.empty())
+            return s1.top();
+        return -1;
+    }
+    
+    int getMin() {
+        return s2.top();
+    }
+};
