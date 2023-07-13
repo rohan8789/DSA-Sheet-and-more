@@ -1,3 +1,21 @@
+Before this problem, let's see the evaluation of atithmetic expression
+
+
+
+Now we need to calculate the value of these arithmetic operations by using a stack. 
+The procedure for getting the result is: 
+Convert the expression in Reverse Polish notation( post-fix notation). 
+Push the operands into the stack in the order they appear. 
+When any operator encounters then pop two topmost operands for executing the operation. 
+After execution push the result obtained into the stack. 
+After the complete execution of expression, the final result remains on the top of the stack. 
+
+
+
+
+
+
+
 Input: S = "231*+9-"
 Output: -4
 
