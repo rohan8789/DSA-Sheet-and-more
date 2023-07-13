@@ -1,0 +1,125 @@
+N = 3
+M[][] = {{0 1 0},
+         {0 0 0}, 
+         {0 1 0}}
+Output: 1
+Explanation: 0th and 2nd person both
+know 1. Therefore, 1 is the celebrity. 
+
+
+
+
+For Input: 
+4
+0 0 1 0
+0 0 1 0
+0 0 0 0
+0 0 1 0
+Your Output: 
+2
+
+
+
+
+
+method 01:- Brute force, O(N^2)
+
+Idea:- To be a celebrity, you should not know anyone in the party. find the person/row which is a valid candidate, i.e, 
+find row with all zeroes. when you did not find any candidate means celebrity is not present. STOP. but, when you found 
+the candidate. break, Now traverse column and find person who is known by all. i.e, find column with all ones.
+and Now, 
+if index of rows with all zeroes === index of column with all ones i.e,
+   person who does not know anyone === person known to all.
+   that person is celebrity. return that index;
+
+Implementation:-
+
+
+class Solution 
+{
+    public:
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        int x=-1, y=-1;
+        for(int i=0; i<n; i++){
+            int j;
+            for(j=0; j<n; j++){
+                if(M[i][j]==1){
+                   break;
+                }
+            }
+            if(j==n){
+               x=i; 
+               break;
+            }
+        }
+        for(int i=0; i<n; i++){
+            int j,c=0;
+            for(j=0; j<n; j++){
+                if(M[j][i]==1)c++;
+            }
+            if(c==n-1){
+                y=i;
+                break;
+            }
+        }
+        if(x==y)return x;
+        return -1;
+    }
+};
+
+
+
+
+Method 02:- Using Stack, it uses elimination method. i.e, eliminate such indexes from stack which are not right candidate for being a celebrity
+for example:- 
+M[][] = {{0 1 0},
+         {0 0 0}, 
+         {0 1 0}}
+0,1,2 are those candidates for becoming a celebrity. we push them to stack. Then, We pop two item
+from stack say x=2,y=1.
+check, 
+    if m[x][y]==1 then, push y to stack, which means x can never we the celebrity bcs x knows y. but for being a celebrity you must not know anyone.
+    if m[y][x]==0 then, push y to stack, which means x can never be the celebrity bcs y does not know x. being a celebrity you, must be known to all.
+
+do it till stack is left with single element, the right candidate to become a celebrity.
+Now check if he is really a celebrity or not...
+
+Algorithm:-
+
+//User function template for C++
+
+class Solution 
+{
+    public:
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        stack<int>s;
+        for(int i=0; i<n; i++){
+            s.push(i);
+        }
+        while(s.size()!=1){
+            int x=s.top();
+            s.pop();
+            int y=s.top();
+            s.pop();
+            if(M[y][x]==0){
+                s.push(y);
+            }else{
+                s.push(x);
+            }
+        }
+        int x=s.top();
+        for(int i=0; i<n; i++){
+            if(x==i)continue;
+            if(M[x][i]==1 || M[i][x]==0){
+                return -1;
+            }
+        }
+        return x;
+    }
+};
+
+
+Method 03:- We can also solve it using the concept of Row with maximum ones
+
