@@ -1,1 +1,80 @@
+Input:
+Stack: 11 2 32 3 41
+Output: 41 32 11 3 2
 
+Method 01:- Using Recursion Only. Must for interviews
+Intuition:-
+        We will be using the concept of insert at bottom. 
+        Firstly, empty the stack. Now start adding elements to its sorted position 
+
+
+void sortedInsert(stack<int>&s, int x){
+    if(s.empty()){
+        s.push(x);
+        return;
+    }
+    int y=s.top();
+    if(y>x){
+        s.pop();
+    }else{
+        s.push(x);
+        return;
+    }
+    sortedInsert(s,x);
+    s.push(y);
+}
+
+
+void SortedStack :: sort()
+{
+    if(s.empty()){
+        return;
+    }
+    int x=s.top();
+    s.pop();
+    sort();
+    sortedInsert(s,x);
+}
+
+
+
+
+
+
+
+Method 02:- Using extra Data structure
+Intuition:-
+        Approach is similar. At the place of recursion, we will use additional stack.
+        Empty the stack 's' first using tail recursion. then,
+        if stack 's' is empty, simply push the element and return
+        else stack s is not empty && s.top()>x then copy all those element to a new stack 'stack' 
+        then add x to its right position and then copy back all those element back to stack 's' and return;
+
+
+
+void insertAtSortedPos(stack<int>&s, int x){
+    if(s.empty()){
+        s.push(x);
+        return;
+    }
+    stack<int>stack;
+    while(!s.empty() && s.top()>x){
+        stack.push(s.top());
+        s.pop();
+    }
+    s.push(x);
+    while(!stack.empty()){
+        s.push(stack.top());
+        stack.pop();
+    }
+}
+void SortedStack :: sort()
+{
+    if(s.empty()){
+        return;
+    }
+    int x=s.top();
+    s.pop();
+    sort();
+    insertAtSortedPos(s, x);
+}
