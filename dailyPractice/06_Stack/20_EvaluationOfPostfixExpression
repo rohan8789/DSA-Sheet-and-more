@@ -1,0 +1,50 @@
+Input: S = "231*+9-"
+Output: -4
+
+
+Input: S = "123+*8-"
+Output: -3
+
+
+class Solution
+{
+    public:
+    int evaluatePostfix(string S)
+    {
+        stack<int>s;
+        for(int i=0; i<S.length(); i++){
+            if(S[i]>='0' && S[i]<='9'){
+                s.push(S[i]-48);
+            }else if(S[i]=='*' && !s.empty()){
+                int x=s.top();
+                s.pop();
+                int y=s.top();
+                s.pop();
+                int m=x*y;
+                s.push(m);
+            }else if(S[i]=='+' && !s.empty()){
+                int x=s.top();
+                s.pop();
+                int y=s.top();
+                s.pop();
+                int add=x+y;
+                s.push(add);
+            }else if(S[i]=='-' && !s.empty()){
+                int x=s.top();
+                s.pop();
+                int y=s.top();
+                s.pop();
+                int sub=y-x;
+                s.push(sub);
+            }else{
+                int x=s.top();
+                s.pop();
+                int y=s.top();
+                s.pop();
+                int divide=y/x;
+                s.push(divide);
+            }
+        }
+        return s.top();
+    }
+};
