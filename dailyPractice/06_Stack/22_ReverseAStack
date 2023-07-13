@@ -1,0 +1,29 @@
+Input:
+St = {3,2,1,7,6}
+Output:
+{6,7,1,2,3}
+
+
+class Solution{
+public:
+    void insertAtBottom(stack<int>&s, int x){
+        if(s.empty()){
+            s.push(x);
+            return;
+        }
+        int y=s.top();
+        s.pop();
+        insertAtBottom(s, x);
+        s.push(y);
+    }
+
+    void Reverse(stack<int> &St){
+        if(St.empty()){
+            return;
+        }
+        int x=St.top();
+        St.pop();
+        Reverse(St);
+        insertAtBottom(St, x);
+    }
+};
