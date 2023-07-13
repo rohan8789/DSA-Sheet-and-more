@@ -1,3 +1,19 @@
+Input:
+N = 5
+arr[] = {2, 3, 4, 5, 1}
+Output: 
+-1 2 3 4 -1
+
+
+Input:
+N = 3
+arr[] = {1, 2, 3} 
+Output:
+-1 1 2 
+
+
+
+
 vector<int> Smallestonleft(int arr[], int n)
 {
     vector<int>v;
