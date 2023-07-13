@@ -3,6 +3,12 @@ St = {3,2,1,7,6}
 Output:
 {6,7,1,2,3}
 
+Intuition:-
+        Apply the concept of 'Insert at bottom' here. 
+        empty the stack using tail recursion and then, 
+        insert all the removed elements on by one to tail of the stack calling another recursion.
+
+
 
 class Solution{
 public:
