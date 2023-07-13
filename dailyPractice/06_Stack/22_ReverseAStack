@@ -3,6 +3,7 @@ St = {3,2,1,7,6}
 Output:
 {6,7,1,2,3}
 
+Method_01:- Recursion Approach. must for Interviews
 Intuition:-
         Apply the concept of 'Insert at bottom' here. 
         empty the stack using tail recursion and then, 
@@ -31,5 +32,30 @@ public:
         St.pop();
         Reverse(St);
         insertAtBottom(St, x);
+    }
+};
+
+
+
+
+Method 02:- Extra DS Approach
+class Solution{
+public:
+    void Rev(stack<int>&St, stack<int>&s){
+        if(St.empty()){
+            return;
+        }
+        int x=St.top();
+        St.pop();
+        Rev(St, s);
+        s.push(x);
+    }
+    void Reverse(stack<int> &St){
+        stack<int>s;
+        Rev(St,s);
+        while(!s.empty()){
+            St.push(s.top());
+            s.pop();
+        }
     }
 };
