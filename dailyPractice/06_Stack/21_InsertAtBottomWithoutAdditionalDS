@@ -1,0 +1,27 @@
+Input:
+N = 5
+X = 2
+St = {4,3,2,1,8}
+Output:
+{2,4,3,2,1,8}
+
+
+class Solution{
+public:
+
+    void solve(stack<int>&s, int x){
+        if(s.empty()){
+            s.push(x);
+            return;
+        }
+        int y=s.top();
+        s.pop();
+        solve(s,x);
+        s.push(y);
+    }
+
+    stack<int> insertAtBottom(stack<int> St,int X){
+        solve(St, X);
+        return St;
+    }
+};
