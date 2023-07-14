@@ -1,4 +1,5 @@
-
+//coding ninjas 
+k is position
 
 Node* insert(int k, int val, Node *head) {
 	Node* temp=head;
