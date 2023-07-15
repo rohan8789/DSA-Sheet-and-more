@@ -1,0 +1,53 @@
+https://practice.geeksforgeeks.org/problems/interleave-the-first-half-of-the-queue-with-second-half/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+
+//n is always even
+n=8
+1 2 3 4 5 6 7 8
+1 5 2 6 3 7 4 8
+
+
+O(n) time O(n) space Solution
+class Solution{
+public:
+    vector<int> rearrangeQueue(queue<int> &q){
+        vector<int>v;
+        int n=q.size();
+        queue<int>helper;
+        int m=n/2;
+        while(m--){
+            helper.push(q.front());
+            q.pop();
+        }
+        while(!q.empty() && !helper.empty()){
+            v.push_back(helper.front());
+            helper.pop();
+            v.push_back(q.front());
+            q.pop();
+        }
+        if(q.size()){
+            v.push_back(q.front());
+        }
+        return v;
+    }
+};
+
+
+
+O(n) time and O(1) space Solution
+class Solution{
+public:
+    vector<int> rearrangeQueue(queue<int> &q){
+        int n=q.size();
+        vector<int> v(n,0);
+        int i=0;
+        while(!q.empty()){
+            v[i]=q.front();
+            q.pop();
+            i=i+2;
+            if(i==n){
+                i=1;
+            }
+        }
+        return v;
+    }
+};
