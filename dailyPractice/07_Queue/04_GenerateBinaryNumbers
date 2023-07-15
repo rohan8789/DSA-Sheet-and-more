@@ -1,0 +1,37 @@
+Mehtod01:- Using Queue data structure
+
+vector<string> generate(int N)
+{
+	queue<string>q;
+	vector<string>v;
+	q.push("1");
+	int i=0;
+	while(i<N){
+	   v.push_back(q.front());
+	   q.push(q.front()+"0");
+	   q.push(q.front()+"1");
+	   q.pop();
+	   i++;
+	}
+	return v;
+}
+
+
+
+Method 02:- converting integer to binary represenatation
+vector<string> generate(int n)
+{
+    vector<string> v;
+	for(int i=1; i<=n; i++){
+	    int x=i;
+	    string s="";
+	    while(x){
+	        int r=x%2;
+	        s=s+to_string(r);
+	        x=x/2;
+	    }
+	    reverse(s.begin(), s.end());
+	    v.push_back(s);
+	}
+	return v;
+}
