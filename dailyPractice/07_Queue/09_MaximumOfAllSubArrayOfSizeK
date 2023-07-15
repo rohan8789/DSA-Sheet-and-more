@@ -1,0 +1,49 @@
+Input:
+N = 9, K = 3
+arr[] = 1 2 3 1 4 5 2 3 6
+Output: 
+3 3 4 5 5 5 6 
+
+
+Input:
+N = 10, K = 4
+arr[] = 8 5 10 7 9 4 15 12 90 13
+Output: 
+10 10 10 15 15 90 90
+
+
+For Input: 
+8 5
+9 10 9 -7 -4 -8 2 -6
+Your Output: 
+10 10 9 2
+
+
+Method 01:- Using Priority_Queue of pairs.
+
+
+class Solution
+{
+  public:
+    vector <int> max_of_subarrays(int *arr, int n, int k)
+    {
+        vector<int>v;
+        priority_queue<pair<int,int>>pq;
+        for(int i=0; i<k; i++){
+            pq.push({arr[i],i});
+        }
+        v.push_back(pq.top().first);
+        for(int i=k; i<n; i++){
+            pq.push({arr[i], i});
+            if(i-pq.top().second<k){
+                v.push_back(pq.top().first);
+            }else{
+                while(i-pq.top().second>=k){
+                    pq.pop();
+                }
+                v.push_back(pq.top().first);
+            }
+        }
+        return v;
+    }
+};
