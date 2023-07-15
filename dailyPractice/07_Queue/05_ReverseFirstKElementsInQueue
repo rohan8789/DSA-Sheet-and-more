@@ -1,0 +1,52 @@
+Input:
+5 3
+1 2 3 4 5
+
+Output: 
+3 2 1 4 5
+
+
+
+
+Method 01:- Using recursive stack
+void solve(queue<int>&q, int k, queue<int>&q1){
+    if(k==0){
+        return;
+    }
+    int x=q.front();
+    q.pop();
+    solve(q,k-1,q1);
+    q1.push(x);
+}
+queue<int> modifyQueue(queue<int>q, int k) {
+    queue<int>q1;
+    solve(q,k,q1);
+    while(!q.empty()){
+        q1.push(q.front());
+        q.pop();
+    }
+    return q1;
+}
+
+
+Method 02:- using additional stack ds
+queue<int> modifyQueue(queue<int> q, int k) {
+    // add code here.
+    queue<int> q1;
+    stack<int>s;
+    int i=0;
+    while(i<k){
+        s.push(q.front());
+        q.pop();
+        i++;
+    }
+    while(!s.empty()){
+        q1.push(s.top());
+        s.pop();
+    }
+    while(!q.empty()){
+        q1.push(q.front());
+        q.pop();
+    }
+    return q1;
+}
