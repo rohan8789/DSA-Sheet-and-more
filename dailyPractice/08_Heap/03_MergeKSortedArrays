@@ -1,0 +1,100 @@
+
+Input:
+K = 3
+arr[][] = {{1,2,3},{4,5,6},{7,8,9}}
+Output: 1 2 3 4 5 6 7 8 9
+Explanation:Above test case has 3 sorted
+arrays of size 3, 3, 3
+arr[][] = [[1, 2, 3],[4, 5, 6], 
+[7, 8, 9]]
+The merged list will be 
+[1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+
+Method 01:- Brute Force Way (Using Merge Function):-
+Time Complexity:- K*K
+
+
+
+class Solution
+{
+    public:
+    vector<int> merge(vector<int>&v1, vector<int>&v2){
+        int i=0,j=0;
+        vector<int>c;
+        while(i<v1.size()&&j<v2.size()){
+            if(v1[i]<=v2[j]){
+                c.push_back(v1[i]);
+                i++;
+            }else{
+                c.push_back(v2[j]);
+                j++;
+            }
+        }
+        while(i<v1.size()){
+            c.push_back(v1[i]);
+            i++;
+        }
+        while(j<v2.size()){
+            c.push_back(v2[j]);
+            j++;
+        }
+        return c;
+    }
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    {
+        vector<int>v;
+        for(int i=0; i<arr[0].size(); i++){
+            v.push_back(arr[0][i]);
+        }
+        int i=1;
+        while(i<k){
+            v=merge(v, arr[i]);
+            i++;
+        }
+       
+        return v;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+Efficient Method 02:- Using min Heap
+
+Intuition:-
+The idea is to use Min Heap. The process must start with creating a MinHeap and inserting 
+the first element of all the k arrays. Remove the root element of Minheap and put it in the 
+output array and insert the next element from the array of removed elements. To get the result 
+the step must continue until there is no element left in the MinHeap.
+
+class Solution
+{
+    public:
+    vector<int> mergeKArrays(vector<vector<int>> arr, int K)
+    {
+        priority_queue<pair<int, pair<int,int>>, vector<pair<int, pair<int,int>>>, greater<pair<int, pair<int,int>>>> pq;
+        for(int i=0; i<K; i++){
+            pq.push({arr[i][0], {i, 0}});
+        }
+        vector<int>v;
+        while(!pq.empty()){
+            auto x=pq.top();
+            pq.pop();
+            v.push_back(x.first);
+            int p=x.second.first;
+            int q=x.second.second;
+            if(q+1<K){
+                pq.push({arr[p][q+1],{p, q+1}});
+            }
+        }
+        return v;
+    }
+};
