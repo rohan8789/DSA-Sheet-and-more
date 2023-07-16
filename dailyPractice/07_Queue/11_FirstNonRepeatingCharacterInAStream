@@ -1,0 +1,36 @@
+For Input: 
+abbabcdac
+Your Output: 
+aaa##cccd
+
+
+
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    int h[26]= {0};
+		    vector<char>v;
+		    int n=A.length();
+		    string s="";
+		    for(int i=0; i<n; i++){
+		        if(h[A[i]-'a']==0){
+		            v.push_back(A[i]);
+		        }
+		        h[A[i]-'a']++;
+		        int f=0;
+		        int m=v.size();
+		        for(int j=0; j<m; j++){
+		            if(h[v[j]-'a']==1){
+		                s.push_back(v[j]);
+		                f=1;
+		                break;
+		            }
+		        }
+		        if(f==0){
+		            s.push_back('#');
+		        }
+		    }
+		    return s;
+		}
+
+};
