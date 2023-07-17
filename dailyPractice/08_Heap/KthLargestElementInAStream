@@ -1,0 +1,25 @@
+For Input: 
+4 11
+12 7 2 5 11 16 8 9 3 9 9
+Your Output: 
+-1 -1 -1 2 5 7 8 9 9 9 9
+
+
+
+
+class Solution {
+  public:
+    vector<int> kthLargest(int k, int arr[], int n) {
+        vector<int>v(n,-1);
+        priority_queue<int,vector<int>,greater<int>>pq(arr,arr+k-1);
+        
+        for(int i=k-1; i<n; i++){
+            pq.push(arr[i]);
+            if(pq.size()>k){
+                pq.pop();
+            }
+            v[i]=pq.top();
+        }
+        return v;
+    }
+};
