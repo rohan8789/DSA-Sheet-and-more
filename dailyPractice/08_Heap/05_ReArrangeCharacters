@@ -55,3 +55,50 @@ class Solution
         return s;
     }   
 };
+
+
+
+
+
+Leetcode
+class Solution {
+public:
+    string reorganizeString(string s) {
+        unordered_map<char, int>m;
+        for(int i=0; i<s.length(); i++)m[s[i]]++;
+        priority_queue<pair<int,char>>pq;
+        for(auto i:m){
+            pq.push({i.second, i.first});
+        }
+        string s1="";
+        while(pq.size()>1){
+            auto p=pq.top();
+            pq.pop();
+            
+            auto q=pq.top();
+            pq.pop();
+            
+            s1=s1+p.second;
+            s1=s1+q.second;
+
+            p.first=p.first-1;
+            q.first=q.first-1;
+            if(p.first>=1){
+                pq.push(p);
+            }
+            if(q.first>=1){
+                pq.push(q);
+            }
+        }
+        if(pq.size()==1){
+            auto p=pq.top();
+            pq.pop();
+            if(p.first==1){
+                s1=s1+p.second;
+            }else{
+                return "";
+            }
+        }
+        return s1;
+    }
+};
