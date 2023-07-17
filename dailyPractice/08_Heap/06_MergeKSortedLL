@@ -1,0 +1,23 @@
+class Solution{
+  public:
+    Node * mergeKLists(Node *arr[], int K)
+        priority_queue<pair<int, Node*>,vector<pair<int,Node*>>,greater<pair<int,Node*>>>pq;
+        for(int i=0; i<K; i++){
+            pq.push({arr[i]->data, arr[i]});
+            arr[i]=arr[i]->next;
+        }
+        Node* ans=new Node(-1);
+        Node* a=ans;
+        int c=0;
+        while(!pq.empty()){
+            auto temp=pq.top();
+            pq.pop();
+            ans->next = new Node(temp.first);
+            ans=ans->next;
+            if(temp.second->next!=NULL){
+                pq.push({temp.second->next->data, temp.second->next});
+            }
+        }
+        return a->next;
+    }
+};
