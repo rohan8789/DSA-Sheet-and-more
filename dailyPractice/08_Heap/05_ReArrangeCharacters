@@ -1,3 +1,16 @@
+Given a string S with repeated characters. The task is to rearrange characters in a string such that no two adjacent characters are the same.
+
+
+Input : str = "geeksforgeeks"
+Output: 1
+
+Input : str = "bbbbb"
+Output: 0
+
+
+
+
+
 class Solution
 {
     public:
