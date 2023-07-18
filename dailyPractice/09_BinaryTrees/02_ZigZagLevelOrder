@@ -1,0 +1,50 @@
+Intuition:- Idea is to use auxillary space.
+          1. If We are going to process level 1 Node. then Process naturally. 
+          2. If twe are going to process level 2 Node then, process in reverse order 
+          3. and so on...
+          4. To do second step we can use a stack or a vector and put level to node in that vector, rather than original vector. 
+          5. After collection of level 2 node is complete then we will reverse the vector and one by one push those elements to original vector
+          and return the answer vector...
+
+
+
+
+
+
+//We can also use k%2==0 k%2==1 instead of using boolean
+class Solution{
+    public:
+    vector <int> zigZagTraversal(Node* root)
+    {
+        vector<int>v;
+        queue<Node*>q;
+        q.push(root);
+        int f=0;
+        while(!q.empty()){
+            vector<int>temp;
+            int n=q.size();
+            for(int i=0; i<n; i++){
+                Node* front=q.front();
+                q.pop();
+                if(f==1){
+                    temp.push_back(front->data);
+                }else{
+                    v.push_back(front->data);
+                }
+                if(front->left){
+                    q.push(front->left);
+                }
+                if(front->right){
+                    q.push(front->right);
+                }
+            }
+            if(f==1){
+                for(int i=temp.size()-1; i>=0; --i)v.push_back(temp[i]);
+                f=0;
+            }else{
+                f=1;
+            }
+        }
+        return v;
+    }
+};
