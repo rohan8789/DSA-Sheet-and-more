@@ -1,0 +1,24 @@
+Iterative implementation of InOrder traversal 
+
+
+class Solution {
+public:
+    vector<int> inOrder(Node* root)
+    {
+        vector<int> v;
+        if(root==NULL)return v;
+        Node* curr=root;
+        stack<Node*>s;
+        while(curr!=NULL || s.empty()==false){
+            while(curr!=NULL){
+                s.push(curr);
+                curr=curr->left;
+            }
+            curr=s.top();
+            s.pop();
+            v.push_back(curr->data);
+            curr=curr->right;
+        }
+        return v;
+    }
+};
