@@ -1,1 +1,50 @@
+1. Inorder
+class Solution {
+  public:
+    void solve(Node* root, vector<int>&v){
+        if(root==NULL)return;
+        
+        solve(root->left,v);
+        v.push_back(root->data);
+        solve(root->right,v);
+    }
+    vector<int> inOrder(Node* root) {
+        vector<int> v;
+        solve(root,v);
+        return v;
+    }
+};
 
+
+
+
+2. postOrder:
+void solve(Node* root, vector<int>&v){
+    if(root==NULL)return;
+    solve(root->left, v);
+    solve(root->right, v);
+    v.push_back(root->data);
+}
+vector <int> postOrder(Node* root)
+{
+    vector<int>v;
+    solve(root, v);
+    return v;
+}
+
+
+
+
+3. preOrder:
+void solve(Node* root, vector<int>&v){
+    if(root==NULL)return;
+    v.push_back(root->data);
+    solve(root->left, v);
+    solve(root->right, v);
+}
+
+vector <int> preorder(Node* root){
+    vector<int>v;
+    solve(root, v);
+    return v;
+}
