@@ -1,0 +1,54 @@
+Input:
+S = "149811", K = 3
+Output: 111
+Explanation: Remove the three digits 
+4, 9, and 8 to form the new number 111
+which is smallest.
+
+
+
+Input:
+S = "1002991", K = 3
+Output: 21
+Explanation: Remove the three digits 1(leading
+one), 9, and 9 to form the new number 21(Note
+that the output must not contain leading
+zeroes) which is the smallest.
+
+
+
+
+class Solution {
+  public:
+    string removeKdigits(string S, int k) {
+        if(S.length()<k)return "0";
+        stack<char>s;
+        string str="";
+        int n=S.length(), i=0;
+        while(S[i]=='0'){
+            i++;
+        }
+        s.push(S[i]);
+        i++;
+        for(int j=i; j<n; j++){
+            while(k!=0 && !s.empty() && s.top()>S[j]){
+                s.pop();
+                k--;
+            }
+            if(s.empty()&&S[j]=='0')continue;
+            s.push(S[j]);
+        }
+        
+        while(k>0&& !s.empty()){
+            s.pop();
+            k--;
+        }
+        if(k>0)return "0";
+        while(!s.empty()){
+            str.push_back(s.top());
+            s.pop();
+        }
+        reverse(str.begin(), str.end());
+        return str;
+    }
+};
