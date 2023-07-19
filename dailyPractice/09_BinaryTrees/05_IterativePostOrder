@@ -1,3 +1,5 @@
+Method 01:-
+
 class Solution{
     public:
     vector<int> postOrder(Node* root) {
@@ -18,5 +20,40 @@ class Solution{
         }
         reverse(v.begin(), v.end());
         return v;
+    }
+};
+
+
+
+
+
+Method 02:-
+class Solution{
+    public:
+    vector<int> postOrder(Node* root) {
+         vector<int> result;
+        if (root == NULL)
+            return result;
+
+        stack<Node*> s;
+        Node* curr = root;
+        Node* prev = NULL;
+
+        while (curr != NULL || !s.empty()) {
+            while (curr != NULL) {
+                s.push(curr);
+                curr = curr->left;
+            }
+
+            Node* top = s.top();
+            if (top->right == NULL || top->right == prev) {
+                result.push_back(top->data);
+                s.pop();
+                prev = top;
+            } else {
+                curr = top->right;
+            }
+        }
+        return result;
     }
 };
