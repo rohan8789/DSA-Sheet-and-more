@@ -1,7 +1,7 @@
 Iterative implementation of ProOrder Traversal
 
 
-Method 01:-
+Method 01:- Best approach, Space Optimized
 class Solution{
     public:
     vector<int> preOrder(Node* root)
