@@ -1,7 +1,7 @@
 Iterative implementation of ProOrder Traversal
 
 
-
+Method 01:-
 class Solution{
     public:
     vector<int> preOrder(Node* root)
@@ -19,6 +19,37 @@ class Solution{
             s.pop();
             curr=curr->right;
         }
+        return v;
+    }
+};
+
+
+
+
+Method 02:-
+
+class Solution{
+    public:
+    void find(Node *root, vector<int> &v){
+        if(root==NULL)
+            return;
+        
+        stack<Node*> s;
+        s.push(root);
+        while(!s.empty()){
+            Node *top =s.top();
+            s.pop();
+            v.push_back(top->data);
+            if(top->right!=NULL)
+                s.push(top->right);
+            if(top->left!=NULL)
+                s.push(top->left);
+        }
+    }
+    
+    vector<int> preOrder(Node* root){
+        vector<int> v;
+        find(root, v);
         return v;
     }
 };
