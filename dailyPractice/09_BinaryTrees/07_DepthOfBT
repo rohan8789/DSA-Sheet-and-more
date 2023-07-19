@@ -1,0 +1,84 @@
+Given a binary tree, find the depth of the deepest odd level leaf node in a binary tree. If there is no leaf at odd level then return 0.
+Consider that level starts with 1. Depth of a leaf node is number of nodes on the path from root to leaf (including both leaf and root).
+
+
+
+
+3 2 7 1 N 5 8 N N 4 6 N 9
+
+
+//Efficient Approach
+class Solution
+{
+    public:
+    int res=INT_MIN;
+    void solve(Node* root, int lvl, int &ans){
+        if(root==NULL)return;
+        if(root->left==NULL && root->right==NULL){
+            res=max(res,lvl);
+            if(lvl%2==1){
+                ans=max(ans,lvl);
+            }
+        }
+        solve(root->left, lvl+1,ans);
+        solve(root->right, lvl+1,ans);
+    }
+    int depthOfOddLeaf(Node *root)
+    {
+        if(root==NULL)return 0;
+        if(root->left==NULL&&root->right==NULL)return 1;
+        int ans=0;
+        solve(root, 1,ans);
+        //cout<<res<<" "<<ans<<endl;
+        if(res%2==1)return res;
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution
+{
+    public:
+    unordered_map<int,int>m;
+    void solve(Node* root, int lvl){
+        if(root==NULL)return;
+        if(root->left==NULL && root->right==NULL){
+            // cout<<lvl<<endl;
+            m.insert({lvl,1});
+        }
+        solve(root->left, lvl+1);
+        solve(root->right, lvl+1);
+    }
+    int depthOfOddLeaf(Node *root)
+    {
+        if(root==NULL)return 0;
+        if(root->left==NULL&&root->right==NULL)return 1;
+        solve(root, 1);
+        int m1=INT_MIN, res=0;
+        for(auto i:m){
+            if(m1<i.first){
+                if(m.find(i.first-1)!=m.end()){
+                    m1=i.first;
+                    res=m1-1;
+                }
+                if(i.first%2==1)m1=i.first;
+            }
+        }
+        if(m1==INT_MIN)return 0;
+        if(m1%2==1)return m1;
+        return res;
+    }
+};
