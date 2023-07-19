@@ -29,3 +29,31 @@ class Solution
         return v;
     }
 };
+
+
+
+
+
+
+class Solution
+{
+    public:
+    void solve(Node* root, vector<int>&v, int lvl, int&mxlvl){
+        if(root==NULL)return;
+        if(mxlvl<lvl){
+            mxlvl=lvl;
+            v.push_back(root->data);
+        }
+        solve(root->right, v, lvl+1, mxlvl);
+        solve(root->left, v, lvl+1, mxlvl);
+    }
+    
+    vector<int> rightView(Node *root)
+    {
+       if(root==NULL)return{};
+       vector<int>v;
+       int mxlvl=0;
+       solve(root, v, 1, mxlvl);
+       return v; 
+    }
+};
