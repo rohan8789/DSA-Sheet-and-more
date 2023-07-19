@@ -1,0 +1,32 @@
+Intuition:- we will solve it using level order traversal. In level order traversal, on each level, you can see only first node of that level
+if you view it from left side, if present. Using this idea we can write the code.
+            
+
+
+Iterative Solution:-
+vector<int> leftView(Node *root)
+{
+    if(root==NULL)return {};
+    vector<int>v;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        int n=q.size();
+        int f=0;
+        for(int i=0; i<n; i++){
+            Node* front=q.front();
+            q.pop();
+            if(f==0){
+                v.push_back(front->data);
+                f=1;
+            }
+            if(front->left){
+                q.push(front->left);
+            }
+            if(front->right){
+                q.push(front->right);
+            }
+        }
+    }
+    return v;
+}
