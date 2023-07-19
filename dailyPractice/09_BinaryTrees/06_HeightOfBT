@@ -1,0 +1,21 @@
+
+Method 01:-
+
+class Solution{
+    public:
+    void solve(Node* root, int lvl, int &ans){
+        if(root==NULL)return;
+        if(root->left==NULL && root->right==NULL){
+            ans=max(ans,lvl);
+        }
+        solve(root->left, lvl+1, ans);
+        solve(root->right, lvl+1, ans);
+    }
+    int height(struct Node* root){
+        if(root==NULL)return 0;
+        if(root->left==NULL&&root->right==NULL)return 1;
+        int ans=0;
+        solve(root, 1, ans);
+        return ans;
+    }
+};
