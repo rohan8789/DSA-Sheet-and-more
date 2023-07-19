@@ -2,7 +2,6 @@ Intuition:- we will solve it using level order traversal. In level order travers
 if you view it from left side, if present. Using this idea we can write the code.
             
 
-
 Iterative Solution:-
 vector<int> leftView(Node *root)
 {
@@ -28,5 +27,45 @@ vector<int> leftView(Node *root)
             }
         }
     }
+    return v;
+}
+
+
+
+
+
+
+
+Note:- the left side view means we must find the left-most side node from every level, excluding NULL.
+Intuition:- PreOrder traversal is used, as In preorder traversal we see left node first.
+            If we stand on left. we can see the tree as cricket stump, where we are able to see only one wicket. 
+            but how can we figure out different branches(In which branch node is present).
+            For that matter, We use max lvl reached till that point concept
+
+1. proceed to exteme left and push those element to vector and keep increasing the lvl+1.<<<<----- This handles moving left side part
+2. But before pushing element to vector, we check if mxlvl<lvl then only we push data
+   to vector and update mxlvl.
+3. If any Node present on right but visible from left view suggest. that length of 
+   that branch is longer among all previously visited branches. then we push thos element to vector.
+
+
+
+
+Method 02:- Recursive Solution
+void solve(Node* root, vector<int>&v, int lvl, int &mxlvl){
+    if(root==NULL)return;
+    if(mxlvl<lvl){
+        mxlvl=lvl;
+        v.push_back(root->data);
+    }
+    solve(root->left,v,lvl+1,mxlvl);
+    solve(root->right,v,lvl+1,mxlvl);
+}
+vector<int> leftView(Node *root)
+{
+    if(root==NULL)return {};
+    vector<int>v;
+    int mxlvl=0;
+    solve(root, v, 1, mxlvl);
     return v;
 }
