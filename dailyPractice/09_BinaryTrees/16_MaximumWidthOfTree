@@ -1,0 +1,53 @@
+Given a Binary Tree, find the maximum width of it. Maximum width is defined as the maximum number of nodes at any level.
+
+O(n) time and O(n) Space complexity recursive solution.
+class Solution {
+  public:
+    int m[100]={0};
+    void solve(Node* root, int lvl){
+        if(root==NULL)return;
+        solve(root->left, lvl+1);
+        solve(root->right, lvl+1);
+        m[lvl]++;
+    }
+  
+    int getMaxWidth(Node* root) {
+        if(root==NULL)return 0;
+        int res=0;
+        solve(root, 0);
+        for(int i=0; i<50; i++){
+            if(m[i]>=1){
+                res=max(res,m[i]);
+            }
+        }
+        return res;
+    }
+};
+
+
+
+Iterative Solution
+class Solution {
+  public:
+    int getMaxWidth(Node* root) {
+        if(root==NULL)return 0;
+        queue<Node*>q;
+        q.push(root);
+        int res=INT_MIN;
+        while(!q.empty()){
+            int n=q.size(); 
+            for(int i=0; i<n; i++){
+                Node* front=q.front();
+                q.pop();
+                if(front->left){
+                    q.push(front->left);
+                }
+                if(front->right){
+                    q.push(front->right);
+                }
+            }
+            res=max(res,n);
+        }
+        return res;
+    }
+};
