@@ -1,0 +1,48 @@
+
+
+Method 01:- Naive Solution O(n^2)
+class Solution{
+    public:
+    int findHeight(Node* root){
+        if(root==NULL)return 0;
+        return max(findHeight(root->left), findHeight(root->right))+1;
+    }
+    bool isBalanced(Node *root)
+    {
+        if(root==NULL)return true;
+        if(root->left==NULL && root->right==NULL)return true;
+        if(isBalanced(root->left) && isBalanced(root->right)){
+            int x=findHeight(root->left);
+            int y=findHeight(root->right);
+            if(abs(x-y)<2)return true;
+        }
+        return false;
+    }
+};
+
+
+
+
+
+
+
+Method 02:- Efficient solution, Almost same as naive, O(n)
+class Solution{
+    public:
+    int solve(Node* root, bool &ans){
+        if(root==NULL)return 0;
+        int lh=solve(root->left,ans);
+        int rh=solve(root->right,ans);
+        if(abs(lh-rh)>=2){
+            ans=false;
+        }
+        return max(lh,rh)+1;
+    }
+    bool isBalanced(Node *root)
+    {
+        if(root==NULL)return true;
+        bool ans=true;
+        int ans1=solve(root, ans);
+        return ans;
+    }
+};
