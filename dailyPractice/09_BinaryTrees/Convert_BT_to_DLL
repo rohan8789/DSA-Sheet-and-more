@@ -1,0 +1,35 @@
+Idea:-
+1. GLobally initialize head=NULL and prev=NULL.
+2. do inorder traversal. root->left==NULL;
+3. Now if prev == NULL set head=root;     // the extreme leftmost node of the tree is assigned to head
+    when prev !=NULL then connect current node(root) to prev using both left and right pointer
+4. Now Call to its right according to inorder traversal
+5. return head. BT is converted to DLL.
+
+
+
+
+class Solution
+{
+    public: 
+    Node* prev=NULL;
+    Node* head=NULL;
+    void solve(Node* root){
+        if(root==NULL)return;
+        solve(root->left);
+        if(prev==NULL){
+            head=root;
+        }else{
+            root->left=prev;
+            prev->right=root;
+        }
+        prev=root;
+        solve(root->right);
+    }
+    Node * bToDLL(Node *root)
+    {
+        if(root==NULL)return NULL;
+        solve(root);
+        return head;
+    }
+};
