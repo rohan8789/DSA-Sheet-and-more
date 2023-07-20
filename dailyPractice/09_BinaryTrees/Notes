@@ -1,0 +1,15 @@
+1.  When we call recursive funtion using && operator
+		bool isSumTree(Node* root) {
+	    	return isSumTree(root->left) && isSumTree(root->right);
+		}
+	This implementation uses a logical AND (&&) operator to check if both the left subtree and the right subtree are Sum Trees.
+	It means that all the subtrees must return true for the answer to be true, otherwise false.
+
+2.	When we call recursive function using || operator
+		bool isSumTree(Node* root) {
+		    return isSumTree(root->left) || isSumTree(root->right);
+		}
+	This implementation uses a logical OR (||) operator to check if either the left subtree or the right subtree is a Sum Tree.
+	It means that if anyof the subtree is true it will return true;
+
+	
