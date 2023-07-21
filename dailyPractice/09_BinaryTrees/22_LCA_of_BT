@@ -78,7 +78,26 @@ class Solution
 
 
 
+
+
+i guess, your code will end up popping all the elements in any case. either you found n or not found n. it will definately pop all the elements. To avoid that , simply call 
+
+if(findPath() || findPath()) return; before popping.
+
+but why???
+
+because, take an example,
+
+1. On a particular path you did not found n==root->data which meant 0 || 0 ------> 0 then it will pop the elements because they are unnecessary. 
+
+2.  In case of 1 || 0------>1 it will not pop as we have found a path
+
+3. In case of 0 || 1 ----->1 it will not pop as we have found a path.
+
+that is the logic behind.  I hope you understood. it took time to me to figure it out. pls upvote
+
 Method 03:- Without passing extra vector to function call.
+TC: O(2N) + SC: O(2N + H)
 class Solution
 {
     public:
@@ -109,5 +128,36 @@ class Solution
             i++;j++;
         }
         return v1[i-1];
+    }
+};
+
+
+
+
+
+Method 04:- Most Efficient approach
+Idea:- Traverse the tree.
+        1. when you reach the leaf node and did not found n1 or n2 return NULL;
+class Solution
+{
+    public:
+    Node* solve(Node* root, int n1, int n2){
+        if(root==NULL)return NULL;
+        if(n1==root->data)return root;
+        if(n2==root->data)return root;
+        
+        Node* l=solve(root->left, n1, n2);
+        Node* r=solve(root->right, n1,n2);
+        
+        if(l==NULL)return r;
+        else if(r==NULL)return l;
+        return root;
+    }
+    
+    Node* lca(Node* root ,int n1 ,int n2 )
+    {
+       if(root==NULL)return NULL;
+       Node* ans=solve(root, n1, n2);
+       return ans;
     }
 };
