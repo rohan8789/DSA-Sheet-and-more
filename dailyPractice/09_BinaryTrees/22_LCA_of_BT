@@ -35,3 +35,41 @@ class Solution
         return ans;
     }
 };
+
+
+
+
+
+Method 02:- Eliminating TLE using better Data structure
+class Solution
+{
+    public:
+    void solve(Node* root, int n, vector<Node*>v, vector<Node*>&v1){
+        if(root==NULL)return;
+        
+        v.push_back(root);
+        solve(root->left,n,v,v1);
+        solve(root->right,n,v,v1);
+        
+        if(n==root->data){
+            for(int i=0; i<v.size(); i++){
+                v1.push_back(v[i]);
+            }
+        }
+    }
+    
+    Node* lca(Node* root ,int n1 ,int n2 )
+    {
+        if(root==NULL)return NULL;
+        Node* temp=root;
+        vector<Node*>v1,v2,v;
+        solve(root,n1,v,v1);
+        solve(root,n2,v,v2);
+        int i=0, j=0;
+        while(i<v1.size() && j<v2.size()){
+            if(v1[i]!=v2[i])break;
+            i++;j++;
+        }
+        return v1[i-1];
+    }
+};
