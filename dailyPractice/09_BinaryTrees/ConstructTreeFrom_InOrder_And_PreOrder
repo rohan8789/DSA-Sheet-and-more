@@ -1,0 +1,42 @@
+Implementation:-
+1. Take first element from preOrder array.
+2. construct root with that element.
+3. search the element in InOrder array.
+4. Element to the left of found elements are nodes of left subtree and element found
+   on the right will be the nodes of right subtree.
+5. for that, recursively call for left subtree and right subtree.
+
+
+
+
+
+
+class Solution{
+    public:
+    int preIndex=0;
+    Node* construct(int in[], int pre[], int s, int e){
+        if(s>e)return NULL;
+        
+        Node* root = new Node(pre[preIndex++]);
+        
+        int inIndex=0;
+        for(int i=s; i<=e; i++){
+            if(in[i]==root->data){
+                inIndex=i;
+                break;
+            }
+        }
+        
+        root->left=construct(in,pre,s,inIndex-1);
+        root->right=construct(in,pre,inIndex+1,e);
+        return root;
+    }
+    
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        if(n==0)return NULL;
+        int s=0,e=n-1;
+        Node* root=construct(in,pre,s,e);
+        return root;
+    }
+};
