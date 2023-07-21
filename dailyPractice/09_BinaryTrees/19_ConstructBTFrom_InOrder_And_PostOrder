@@ -1,0 +1,27 @@
+Implementation:- Traverse post array from end and do the same
+
+
+
+
+
+Node* construct(int in[], int post[], int s, int e, int &postIndex){
+    if(s>e)return NULL;
+    
+    Node* root = new Node(post[postIndex--]);
+    int inIndex=0;
+    for(int i=s; i<=e; i++){
+        if(in[i]==root->data){
+            inIndex=i;
+            break;
+        }
+    }
+    root->right=construct(in,post,inIndex+1,e, postIndex);
+    root->left=construct(in,post,s,inIndex-1, postIndex);
+    return root;
+}
+
+Node *buildTree(int in[], int post[], int n) {
+    int s=0, e=n-1, postIndex=n-1;
+    Node* root=construct(in,post,s,e, postIndex);
+    return root;
+}
