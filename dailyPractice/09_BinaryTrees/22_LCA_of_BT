@@ -73,3 +73,41 @@ class Solution
         return v1[i-1];
     }
 };
+
+
+
+
+
+Method 03:- Without passing extra vector to function call.
+class Solution
+{
+    public:
+    bool solve(Node* root, int n, vector<Node*>&v){
+        if(root==NULL)return false;
+        v.push_back(root);
+        if(n==root->data){
+            return true;
+        }
+        if(solve(root->left,n,v) || solve(root->right,n,v)){
+            return true;
+        }
+        v.pop_back();
+        return false;
+    }
+    
+    Node* lca(Node* root ,int n1 ,int n2 )
+    {
+        if(root==NULL)return NULL;
+        vector<Node*>v1,v2;
+        solve(root, n1, v1);
+        solve(root, n2, v2);
+        int i=0, j=0;
+        while(i<v1.size()&&j<v2.size()){
+            if(v1[i]!=v2[j]){
+                break;
+            }
+            i++;j++;
+        }
+        return v1[i-1];
+    }
+};
