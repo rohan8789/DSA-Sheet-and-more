@@ -149,9 +149,9 @@ class Solution
         Node* l=solve(root->left, n1, n2);
         Node* r=solve(root->right, n1,n2);
         
-        if(l==NULL)return r;
-        else if(r==NULL)return l;
-        return root;
+        if(l!=NULL && r!=NULL)return root;
+        else if(l!=NULL)return l;
+        return r;    //NULL to hoga hi, left ho ya right
     }
     
     Node* lca(Node* root ,int n1 ,int n2 )
