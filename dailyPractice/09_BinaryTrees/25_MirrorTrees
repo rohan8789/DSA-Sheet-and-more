@@ -1,0 +1,15 @@
+Idea:- simply swap left and right subtree
+
+class Solution {
+  public:
+    void swapFun(Node* root){
+        if(root==NULL)return;
+        swap(root->left, root->right);
+    }
+    void mirror(Node* root) {
+        if(root==NULL)return;
+        mirror(root->left);
+        mirror(root->right);
+        swapFun(root);
+    }
+};
