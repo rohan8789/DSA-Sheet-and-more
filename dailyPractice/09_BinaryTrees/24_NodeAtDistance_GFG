@@ -1,0 +1,31 @@
+Given a Binary Tree and a positive integer k. The task is to count all distinct nodes that are distance k from a leaf node. A node is at k distance from 
+a leaf if it is present k levels above the leaf and also, is a direct ancestor of this leaf node. If k is more than the height of Binary Tree, 
+then nothing should be counted.
+
+
+
+
+
+Do not go with storing integer value. there could be duplicates which can cause problem, rather store node in vector and set.
+
+void solve(Node* root, int k, int lvl, vector<Node*>v, unordered_set<Node*>&visited){
+    if(root==NULL)return;
+    v.push_back(root);
+    solve(root->left, k, lvl+1, v,visited);
+    solve(root->right, k, lvl+1,v,visited);
+    if(root->left==NULL && root->right==NULL){
+        if(lvl-k>=0){
+            visited.insert(v[lvl-k]);
+        }
+    }
+}
+
+int printKDistantfromLeaf(Node* root, int k)
+{ 
+	if(root==NULL)return 0;
+    int s=0;
+	vector<Node*>v;
+	unordered_set<Node*>visited;
+	solve(root, k, 0, v, visited);
+	return visited.size();
+}
