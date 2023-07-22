@@ -1,0 +1,26 @@
+Brilliant Ques, Recursion very well covered.
+
+
+
+class Solution{
+  public:
+    bool check(Node* T, Node* S){
+        if(T==NULL && S==NULL)return true;
+        if(T==NULL || S==NULL){
+            return false;
+        }
+        // cout<<T->data<<" "<<S->data<<endl;
+        return T->data==S->data && check(T->left, S->left) && check(T->right, S->right);
+    }
+  
+    bool isSubTree(Node* T, Node* S){
+        if(T==NULL && S==NULL)return true;
+        if(T==NULL || S==NULL)return false;
+            if(T->data==S->data){
+                if(check(T,S)){
+                    return true;
+                }
+            }
+        return isSubTree(T->left, S) || isSubTree(T->right, S);
+    }
+};
