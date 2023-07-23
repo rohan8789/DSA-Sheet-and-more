@@ -1,0 +1,31 @@
+1 2 3 4 5 6 7 N N N N N 8 N 9
+6
+
+
+int verticalWidth(Node* root)
+{
+    if(root==NULL)return 0;
+    if(root->left==NULL && root->right==NULL)return 1;
+    queue<pair<Node*,int>>qp;
+    int count=0, a1=0, a2=0;
+    qp.push({root, count});
+    int ans=0;
+    while(!qp.empty()){
+        int n=qp.size();
+        for(int i=0; i<n; i++){
+            auto x=qp.front();
+            qp.pop();
+            if(x.first->left!=NULL){
+                qp.push({x.first->left, x.second-1});
+                a1=min(a1,x.second-1);
+            }
+            if(x.first->right!=NULL){
+                qp.push({x.first->right, x.second+1});
+                a2=max(a2,x.second+1);
+            }
+            // cout<<a1<<" "<<a2<<" "<<x.first->data<<endl;
+        }
+    }
+    int res=abs(a1)+a2+1;
+    return res;
+}
