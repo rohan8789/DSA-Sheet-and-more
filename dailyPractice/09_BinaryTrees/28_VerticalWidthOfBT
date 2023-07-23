@@ -1,6 +1,6 @@
 1 2 3 4 5 6 7 N N N N N 8 N 9
 6
-
+Intuition:- Do level order traversal and maintain queue of pair, update count-1 when moved left and count+1 when moved right. return abs(minLeft)+maxRight+1;
 
 int verticalWidth(Node* root)
 {
