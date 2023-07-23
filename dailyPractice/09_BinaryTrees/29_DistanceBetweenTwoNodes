@@ -1,0 +1,26 @@
+class Solution{
+    public:
+    bool lcaPath(Node* root, int a, vector<int>&v){
+        if(root==NULL)return false;
+        v.push_back(root->data);
+        if(root->data==a)return true;
+        if(lcaPath(root->left, a, v) || lcaPath(root->right, a, v)){
+            return true;
+        }
+        v.pop_back();
+        return false;
+    }
+    
+    int findDist(Node* root, int a, int b) {
+        if(root==NULL)return 0;
+        vector<int>v1,v2;
+        lcaPath(root,a,v1);
+        lcaPath(root,b,v2);
+        int i=0;
+        while(i<v1.size() && i<v2.size()){
+            if(v1[i]!=v2[i])break;
+            i++;
+        }
+        return v1.size()-i+v2.size()-i;
+    }
+};
