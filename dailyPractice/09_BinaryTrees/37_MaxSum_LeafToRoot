@@ -20,3 +20,30 @@ class Solution{
         return ans;
     }
 };
+
+
+
+
+Better Solution:-
+class Solution{
+    public:
+    void find(Node *root, int sum, int &m){
+        if(root==NULL)
+            return;
+        sum=sum+root->data;
+        if(root->left==NULL && root->right==NULL){
+            m=max(m, sum);
+        }
+        find(root->left, sum,m);
+        find(root->right, sum, m);
+    }
+    
+    int maxPathSum(Node* root){
+        if(root==NULL)
+            return 0;
+        vector<int> v;
+        int m=INT_MIN;
+        find(root, 0, m);
+        return m;
+    }
+};
