@@ -1,0 +1,24 @@
+2 5 6 7 1 3 9 2 6 N N N N 0 N N N N 4 -1 N N 10
+
+Intuition:- When you visit a path keep track of maximum element visited i.e, mx, and maintain the copy of it. and after level store max of mx-curr->data for that path
+where mx will be your ancestor. pass mx by value so that when function call removes from stack it changes back to previous max;
+
+
+
+void solve(Node* root, int f, int &ans){
+    if(root==NULL)return;
+    if(f!=-1){
+        ans=max(ans,f-root->data);
+    }
+    f=max(f,root->data);
+    solve(root->left,f,ans);
+    solve(root->right,f,ans);
+ }
+ 
+int maxDiff(Node* root)
+{
+    if(root==NULL)return 0;
+    int ans=INT_MIN;
+    solve(root, -1, ans);
+    return ans;
+}
