@@ -1,0 +1,29 @@
+Input:
+N = 5
+K = 1->2->3->4->5
+Output: 1 2 3 4 5
+
+
+
+
+void convert(Node *head, TreeNode *&root) {
+    if(head==NULL)return;
+    queue<TreeNode*>q;
+    root=new TreeNode(head->data);
+    head=head->next;
+    q.push(root);
+    while(!q.empty()){
+        TreeNode* front=q.front();
+        q.pop();
+        if(head){
+            front->left= new TreeNode(head->data);
+            q.push(front->left);
+            head=head->next;
+        }
+        if(head){
+            front->right= new TreeNode(head->data);
+            q.push(front->right);
+            head=head->next;
+        }
+    }
+}
