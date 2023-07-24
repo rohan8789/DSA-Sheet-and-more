@@ -1,3 +1,38 @@
+
+
+//Wont work in case of negative elemeents
+class Solution{
+    public:
+    int solve(Node* root, int&ans){
+        if(root==NULL)return 0;
+        int ls=solve(root->left, ans);
+        int rs=solve(root->right, ans);
+        return root->data+max(ls,rs);
+    }
+    
+    int maxPathSum(Node* root){
+        if(root==NULL)return 0;
+        int ans=INT_MIN;
+        int x=solve(root, ans);
+        return x;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution{
     public:
     void solve(Node* root, vector<int>v, int&ans){
