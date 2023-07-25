@@ -1,3 +1,16 @@
+10 2 -5 20 1 3 4
+32
+
+10 2 -5 20 13 3 4
+35
+
+
+Inutition:- This is a standard Backtracking problem.
+      Using the concept of height, we can find which path gives the maximum sum i.e, return root->data+max(ls,rs);
+      but this isn't necessary that root to leaf path would be maximum there might be a U-shaped path within subtrees. How to handle that??
+      To handle such cases, we pass a variable by reference and before rootData + max(ls,rs) we just simply add rootData+ls+rs and take maximum
+      This handles the problem
+
 class Solution {
   public:
     int res=INT_MIN;
