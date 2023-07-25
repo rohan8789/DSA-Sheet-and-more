@@ -1,6 +1,6 @@
 
 
-//Wont work in case of negative elemeents
+//Wont work in case of negative elemeents. we are not finding final answer on leaf rather we are finding answer on each point.
 class Solution{
     public:
     int solve(Node* root, int&ans){
