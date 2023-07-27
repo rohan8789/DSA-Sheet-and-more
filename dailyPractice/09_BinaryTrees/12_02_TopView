@@ -1,1 +1,29 @@
-
+class Solution
+{
+    public:
+    vector<int> topView(Node *root)
+    {
+        if(root==NULL)return{};
+        vector<int>v;
+        queue<pair<Node*,int>>qp;
+        map<int,int>mp;
+        qp.push({root,0});
+        while(!qp.empty()){
+            for(int i=0; i<qp.size(); i++){
+                auto x=qp.front();
+                qp.pop();
+                mp.insert({x.second, x.first->data});
+                if(x.first->left!=NULL){
+                    qp.push({x.first->left, x.second-1});
+                }
+                if(x.first->right!=NULL){
+                    qp.push({x.first->right, x.second+1});
+                }
+            }
+        }
+        for(auto i:mp){
+            v.push_back(i.second);
+        }
+        return v;
+    }
+};
