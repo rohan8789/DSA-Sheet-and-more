@@ -1,0 +1,30 @@
+class Solution {
+  public:
+  
+    int check(Node* root){
+        if(root==NULL)return 0;
+        int sum=0;
+        if(root->left!=NULL)sum+=root->left->data;
+        if(root->right!=NULL)sum+=root->right->data;
+        sum+=root->data;        
+        root->data=sum;
+        return sum;
+    }
+  
+    int solve(Node* root, int&ans){
+        if(root==NULL)return 0;
+        solve(root->left,ans);
+        solve(root->right,ans);
+        int x=check(root);
+        ans=max(ans,x);
+        return ans;
+    }
+    int findLargestSubtreeSum(Node* root)
+    {
+        if(root==NULL)return 0;
+        int ans=INT_MIN;
+        int x=solve(root, ans);
+        ans=max(ans,x);
+        return x;
+    }
+};
