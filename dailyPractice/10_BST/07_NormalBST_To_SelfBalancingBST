@@ -1,0 +1,34 @@
+Intuition:- Take Inorder and push to vector. Then call recursion on o to m-1 and m+1 to n and build tree
+
+
+
+
+
+
+
+
+void solve(Node* root, vector<Node*>&v){
+    if(root==NULL)return;
+    solve(root->left,v);
+    v.push_back(root);
+    solve(root->right,v);
+}
+
+Node* construct(vector<Node*>&v, int l, int h){
+    if(l>h)return NULL;
+    int m=(l+h)/2;
+    Node* temp=v[m];
+    temp->left=construct(v,l,m-1);
+    temp->right=construct(v,m+1,h);
+    return temp;
+}
+
+Node* buildBalancedTree(Node* root)
+{
+    if(root==NULL)return NULL;
+    vector<Node*>v;
+    solve(root,v);
+    int l=0, h=v.size()-1;
+    Node* ans=construct(v,l,h);
+    return ans;
+}
