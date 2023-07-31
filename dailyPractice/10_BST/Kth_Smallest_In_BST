@@ -1,0 +1,24 @@
+method 01:- O(n) time O(n) Space
+class Solution {
+  public:
+    int k=0;
+    void solve(Node* root, int K, int&ans){
+        if(root==NULL)return;
+        solve(root->left,K,ans);
+        k++;
+        if(k==K){
+            ans=root->data;
+            return;
+        }
+        solve(root->right,K,ans);
+    }
+    
+    int KthSmallestElement(Node *root, int K) {
+        if(root==NULL)return NULL;
+        int ans=-1;
+        solve(root,K,ans);
+        return ans;
+    }
+};
+
+Method 02:- morris traversal to achieve O(1) space solution
