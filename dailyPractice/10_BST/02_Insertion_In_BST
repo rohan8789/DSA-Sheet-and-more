@@ -1,3 +1,4 @@
+Method 01:- Recursive
 Node* insert(Node* root, int key) {
     if(root==NULL){
         root=new Node(key);
@@ -10,4 +11,25 @@ Node* insert(Node* root, int key) {
     }else{
         return root;
     }
+}
+
+Method 02:- Iterative, More Space optimized
+Node* insert(Node* root, int key) {
+    Node* parent=root, *curr=NULL;
+    while(parent!=NULL){
+        curr=parent;
+        if(parent->data<key){
+            parent=parent->right;
+        }else if(parent->data>key){
+            parent=parent->left;
+        }else{
+            return root;
+        }
+    }
+    if(curr->data>key){
+        curr->left=new Node(key);
+    }else{
+        curr->right=new Node(key);
+    }
+    return root;
 }
