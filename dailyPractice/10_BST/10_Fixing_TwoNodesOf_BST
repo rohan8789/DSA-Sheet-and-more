@@ -23,3 +23,36 @@ class Solution {
         }
     }
 };
+
+
+
+
+
+
+Method 02:- Efficient solution, No additional vector
+Intuition:- Inorder of bst is sorted data, we know that. There are just two nodes that is to be fixed. If we somehow get two pointer 
+            on required nodes. we can swap and fix the problem
+
+class Solution {
+  public:
+    void solve(Node* root, Node** first, Node** second, Node** prev){
+        if(root==NULL)return;
+        solve(root->left,first,second,prev);
+        if(*prev!=NULL && root->data<(*prev)->data){
+            if(*first==NULL){
+                *first=*prev;
+            }
+            *second=root;
+        }
+        *prev=root;
+        solve(root->right,first,second,prev);
+    }
+  
+    struct Node *correctBST(struct Node *root) {
+        if(root==NULL)return NULL;
+        Node* first=NULL,*second=NULL, *prev=NULL;
+        solve(root,&first,&second,&prev);
+        swap(first->data,second->data);
+        return root;
+    }
+};
