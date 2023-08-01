@@ -1,0 +1,26 @@
+
+
+Method 01:- is to use recursion. and if our (X > rootValue). we want more greater value to reduce the absolute difference;
+Mehtod 02:- iterative way is more efficient way to solve this problem.
+class Solution
+{
+    public:
+    void solve(Node* root, int k, int &ans){
+        if(root==NULL)return;
+      
+        ans=min(ans,abs(k-root->data));
+        if(k>=root->data){
+            solve(root->right,k,ans);
+        }else{
+            solve(root->left,k,ans);
+        }
+    }
+    
+    int minDiff(Node *root, int k)
+    {
+        if(root==NULL)return 0;
+        int ans=INT_MAX;
+        solve(root,k,ans);
+        return ans;
+    }
+};
