@@ -1,0 +1,22 @@
+This method is well and good for any types of traversal to convert it into BST
+
+
+Node* solve(Node* root, int x){
+    if(root==NULL)return new Node(x);
+    if(root->data>=x){
+        root->left=solve(root->left,x);
+    }else{
+        root->right=solve(root->right,x);
+    }
+    return root;
+}
+
+
+Node* constructBst(int arr[], int n)
+{
+    Node* ans= new Node(arr[0]);
+    for(int i=1; i<n; i++){
+        ans=solve(ans,arr[i]);
+    }
+    return ans;
+}
