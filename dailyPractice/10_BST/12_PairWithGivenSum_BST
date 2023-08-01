@@ -1,0 +1,70 @@
+6 1 8 N 2 7 9 N 3 N N N 10 N 5
+12
+
+
+Method 01:- Using Recursion
+class Solution{
+  public:
+    void solve(Node* root, int x, unordered_set<int>&s, int&ans){
+        if(root==NULL)return;
+        solve(root->left,x,s,ans);
+        if(s.find(x-root->data)!=s.end()){
+            ans=1;
+        }
+        s.insert(root->data);
+        solve(root->right,x,s,ans);
+    }
+    
+    int isPairPresent(struct Node *root, int target)
+    {
+        if(root==NULL)return 0;
+        int ans=0;
+        unordered_set<int>s;
+        solve(root,target,s,ans);
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+Method 02:- making bst a sorted vector and using two pointer
+class Solution{
+  public:
+    void inOrder(Node *root, vector<int> &v){
+        if(root==NULL)
+            return;
+        inOrder(root->left, v);
+        v.push_back(root->data);
+        inOrder(root->right, v);
+
+    }
+    
+    int isPairPresent(struct Node *root, int target)
+    {
+        if(root==NULL)
+            return 0;
+        vector<int> v;
+        inOrder(root, v);
+        int l=0;
+        int h=v.size()-1;
+        while(l<=h){
+            if(v[l]+v[h]==target){
+                return true;
+            }
+            else if(v[l]+v[h]>target){
+                h--;
+            }
+            else{
+                l++;
+            }
+        }
+        return false;
+    }
+};
+
+
+
