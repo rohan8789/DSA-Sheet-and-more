@@ -1,0 +1,69 @@
+This has very easy and intuitive solution unlike Binary tree. Here we will make use of properties of BST and anchestors.
+
+1. An anchestor of a node is defined as all the node on the path which appeared before current node
+2. If we take 2 node and find its lca over BST. then, if n1<root->data && n2<root-<data which
+   means root->data is an anchestor but not sure to be the least one. hence we move root->left.
+   
+3. We do the same when n1>root->data and n2>root->data. same thing is applied.
+
+4. but, when n1<root->data && n2>root->data. Then, it clearly means it has two different path from now. hence this could be our possible answer
+
+Implementation:-
+
+
+Node* LCA(Node *root, int n1, int n2)
+{
+    if(root==NULL)
+        return NULL;
+    
+    if(n1<root->data && n2<root->data)
+    {
+        return LCA(root->left, n1, n2);
+    }
+    else if(n1>root->data && n2>root->data)
+    {
+        return LCA(root->right, n1, n2);
+    }
+    else{
+        return root;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution{
+    public:
+    Node* solve(Node* root, int n1, int n2){
+        if(root==NULL)return NULL;
+        if(n1==root->data)return root;
+        if(n2==root->data)return root;
+        Node* l=solve(root->left,n1,n2);
+        Node* r=solve(root->right,n1,n2);
+        if(l!=NULL && r!=NULL)return root;
+        else if(l!=NULL)return l;
+        return r;
+            
+    }
+
+    Node* LCA(Node *root, int n1, int n2)
+    {
+        if(root==NULL)return NULL;
+        Node* ans = solve(root,n1,n2);
+        return ans;
+    }
+};
