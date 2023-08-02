@@ -1,0 +1,19 @@
+10 8 12 3 
+3->8 8->10 10->12 12->-1
+
+
+class Solution
+{
+  public:
+    Node* prev=NULL;
+    void populateNext(Node *root)
+    {
+        if(root==NULL)return;
+        populateNext(root->left);
+        if(prev!=NULL){
+            prev->next=root;
+        }
+        prev=root;
+        populateNext(root->right);
+    }
+};
