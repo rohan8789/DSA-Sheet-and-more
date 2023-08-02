@@ -1,0 +1,27 @@
+class Solution{
+  public:
+    void solve(Node* root,vector<int>&v){
+        if(root==NULL)return;
+        solve(root->left,v);
+        solve(root->right,v);
+        v.push_back(root->data);
+    }
+    int i=0;
+    void inorder(Node* root, vector<int>&v){
+        if(root==NULL)return;
+        inorder(root->left,v);
+        root->data=v[i];
+        i++;
+        inorder(root->right,v);
+    }
+    
+    Node *binaryTreeToBST (Node *root)
+    {
+        if(root==NULL)return NULL;
+        vector<int>v;
+        solve(root,v);
+        sort(v.begin(),v.end());
+        inorder(root,v);
+        return root;
+    }
+};
