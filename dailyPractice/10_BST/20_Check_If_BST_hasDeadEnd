@@ -1,0 +1,67 @@
+2
+6
+8 5 9 7 2 1
+6
+8 7 10 9 13 2
+
+op: 1,1
+
+
+1
+14
+47 92 21 117 34 63 51 77 2 106 46 45 88 57
+op:-1
+
+1
+11
+119 66 1 57 5 67 43 66 69 17 43
+op:-0
+
+Ques:- check if, At leaf we can insert anymore elements or not.
+Given a Binary Search Tree that contains positive integer values greater than 0. The task is to complete the function isDeadEnd which 
+returns true if the BST contains a dead end else returns false. Here Dead End means, we are not able to insert any element after that node.
+
+
+Intuition:-
+First, We will traverse the tree and put all the nodes into a hash/set. 
+Then, we again traverse the tree and at leaf x, we check x+1 && x-1 is present in tree or not.
+In case of x==1, we check only x+1 is present or not. 
+
+If present means this has dead end.
+
+
+void inorder(Node* root, set<int>&s){
+    if(root==NULL)return;
+    inorder(root->left,s);
+    s.insert(root->data);
+    inorder(root->right,s);
+}
+
+void solve(Node* root, set<int>&s, bool&ans){
+    if(root==NULL)return;
+    solve(root->left,s,ans);
+    if(root->left==NULL && root->right==NULL){
+        int c=0;
+        if(s.find(root->data+1)!=s.end())c++;
+        if(s.find(root->data-1)!=s.end())c++;
+        if(root->data==1){
+            if(c==1){
+                ans=true;
+            }
+        }
+        if(c==2){
+            ans=true;
+        }
+    }
+    solve(root->right,s,ans);
+}
+
+bool isDeadEnd(Node *root)
+{
+    if(root==NULL)return false;
+    bool ans=false;
+    set<int>s;
+    inorder(root,s);
+    solve(root, s, ans);
+    return ans;
+}
