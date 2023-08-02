@@ -1,0 +1,36 @@
+5 3 7 2 4 6 8 
+10 6 15 3 8 11 18 
+16
+
+op:-3
+
+
+
+class Solution
+{
+    public:
+    void solve(Node* root, unordered_set<int>&s){
+        if(root==NULL)return;
+        s.insert(root->data);
+        solve(root->left,s);
+        solve(root->right,s);
+    }
+    
+    void find(Node* root, unordered_set<int>&s, int x, int&c){
+        if(root==NULL)return;
+        if(s.find(x-root->data)!=s.end()){
+            c++;
+        }
+        find(root->left,s,x,c);
+        find(root->right,s,x,c);
+    }
+
+    int countPairs(Node* root1, Node* root2, int x)
+    {
+        unordered_set<int>s;
+        solve(root1,s);
+        int c=0;
+        find(root2,s,x,c);
+        return c;
+    }
+};
