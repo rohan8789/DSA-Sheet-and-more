@@ -6,7 +6,7 @@
 1
 
 
-Method 01:- Brute force
+Method 01:- Brute force using Inorder vector.
 class Solution
 {
     public:
@@ -45,3 +45,68 @@ class Solution
         }
     }
 };
+
+
+Method 02:- Using Recursion
+class Solution
+{
+    public:
+    void solve(Node* root, Node*&pre, Node*&suc, int key){
+        if(root==NULL)return;
+        if(root->key>key){
+            suc=root;
+            solve(root->left,pre,suc,key);
+        }else if(root->key<key){
+            pre=root;
+            solve(root->right,pre,suc,key);
+        }else{
+            solve(root->left,pre,suc,key);
+            solve(root->right,pre,suc,key);
+        }
+    }
+    
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        if(root==NULL)return;
+        solve(root,pre,suc,key);
+    }
+};
+
+
+
+Method 03:-(Most efficient) call a function to find predecessor and another function to find successor
+void prede(Node* root, Node*& pre, int key)
+{
+    while(root!=0)
+    {
+        if(key<=root->key)
+        {
+            root=root->left;
+        }
+        else
+        {
+            pre=root;
+            root=root->right;
+        }
+    }
+}
+void succe(Node* root, Node*& suc, int key)
+{
+    while(root!=0)
+    {
+        if(key>= root->key)
+        {
+            root=root->right;
+        }
+        else
+        {
+            suc=root;
+            root=root->left;
+        }
+    }
+}
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+{
+    prede(root,pre,key);
+    succe(root,suc,key);
+}
