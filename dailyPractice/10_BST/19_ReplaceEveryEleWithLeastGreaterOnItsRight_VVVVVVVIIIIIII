@@ -1,0 +1,25 @@
+Input:
+arr[] = {8, 58, 71, 18, 31, 32, 63, 92, 43, 3, 91, 93, 25, 80, 28}
+Output: {18, 63, 80, 25, 32, 43, 80, 93, 80, 25, 93, -1, 28, -1, -1}
+
+
+
+class Solution{
+    public:
+    vector<int> findLeastGreater(vector<int>& arr, int n) {
+        vector<int>v;
+        set<int>s;
+        for(int i=arr.size()-1; i>=0; --i){
+            auto it=s.upper_bound(arr[i]);
+            if(it==s.end()){
+                v.push_back(-1);
+            }
+            else{
+                v.push_back(*it);
+            }
+            s.insert(arr[i]);
+        }
+        reverse(v.begin(),v.end());
+        return v;
+    }
+};
