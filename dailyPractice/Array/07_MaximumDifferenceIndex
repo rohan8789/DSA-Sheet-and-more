@@ -9,6 +9,8 @@ Number 1's first appearance is at index 1 and last appearance is at index 7. Thi
 This is the maximum possible in the given test case.
 
 
+https://practice.geeksforgeeks.org/problems/maximum-difference-10429/1
+
 
 class Solution{
     public:
