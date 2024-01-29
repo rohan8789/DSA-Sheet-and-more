@@ -26,3 +26,32 @@ public:
         return v;
     }
 };
+
+
+
+class Solution{
+public:
+    vector<vector<int> > stockBuySell(vector<int> A, int n){
+        vector<vector<int>>v;
+        int start=0,end=0,s=0;
+        for(int i=1; i<n; i++){
+            if(A[i-1]<=A[i]){
+                s=start;
+                end=i;
+            }else{
+                if(start<end)
+                    v.push_back({start, end});
+                start=i;
+            }
+        }
+        if(start<end)v.push_back({start, end});
+        
+        return v;
+    }
+};
+
+
+
+
+//Solved someday later
+
