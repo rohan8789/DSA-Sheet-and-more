@@ -31,10 +31,12 @@ Method 2:-
 //Marking the index as negative , it will not work for more than two negative element
 Intuition:- 
 
-The idea is to mark the elements in the array as negative. when index is found which is already marked then it can be our answer
+The idea is to mark the elements in the array as negative. when index is found which is already marked 
+then it can be our answer
 say arr[arr[5]] = arr[1] = 3;
 and, arr[arr[8]] = arr[1] = 3;
-which means arr[5] and arr[8] both contains 1 hence, when arr[5] was marked negative. then any number of duplicate elements come it will be marked negative
+which means arr[5] and arr[8] both contains 1 hence, when arr[5] was marked negative. then any number of 
+duplicate elements come it will be marked negative
 
 
 class Solution {
