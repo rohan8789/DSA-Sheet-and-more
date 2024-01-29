@@ -27,3 +27,28 @@ class Solution{
         return res;
     }
 };
+
+
+
+
+method 02:
+class Solution{
+    public:
+    int maxDiffIndex(int A[], int N)
+    {
+        unordered_map<int,pair<int,int>>m;
+        for(int i=0; i<N; i++){
+            if(m.find(A[i])!=m.end()){
+                m[A[i]].second=i;
+            }
+            else{
+                m.insert({A[i], {i,0}});
+            }
+        }
+        int res=INT_MIN;
+        for(auto i:m){
+            res=max(res, i.second.second-i.second.first);
+        }
+        return res;
+    }
+};
