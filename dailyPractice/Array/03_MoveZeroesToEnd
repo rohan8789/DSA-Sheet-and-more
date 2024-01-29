@@ -1,3 +1,8 @@
+
+N = 5
+Arr[] = {3, 5, 0, 0, 4}
+Output: 3 5 4 0 0
+
 class Solution{
 public:
 	void pushZerosToEnd(int arr[], int n) {
