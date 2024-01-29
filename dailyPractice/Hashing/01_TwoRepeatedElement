@@ -12,8 +12,8 @@ Output: 2 1
 
  Method 1:-
  /*
-      In this approach releative order is not maintained
-      and also does not work for more than two duplicate elements
+      In this approach releative order is not maintained and also does not work for more than two duplicate elements
+      it can work for more than 2 distinct duplicates but will not work for multiple duplicate of same element
  */
 
 
