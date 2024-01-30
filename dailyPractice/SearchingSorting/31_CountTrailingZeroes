@@ -1,8 +1,8 @@
 
-Idea is to count how many 2s and 5s are there in prime factorization of the given number. since no of 2s are greater than no. of 5s
-We take min(2s, 5s). 
-If we are given n, then, there are atleast 'n/5' 5s in its factorial. there can we more than that. i.e, 5, 25, 125 ... such perfect square have
-extra 5 in its factorial.
+Idea is to count how many 2s and 5s are there in prime factorization of the given 
+number. since no of 2s are greater than no. of 5s. We take min(2s, 5s). 
+If we are given n, then, there are atleast 'n/5' 5s in its factorial. there can we 
+more than that. i.e, 5, 25, 125 ... such perfect square have. extra 5 in its factorial.
 
 implementation Below
 
