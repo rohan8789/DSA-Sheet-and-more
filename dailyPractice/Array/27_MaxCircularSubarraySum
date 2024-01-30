@@ -1,3 +1,77 @@
+Brute force way is to iterate array and apply kadanes algo and then rotate the array
+by once or use (i%n) to wrap around. then, again apply the same technique. This will 
+take O(n^2) time.
+
+An optimized way would be to concatenate two array and then apply kadane algo. Here
+we can solve this in O(n) time taking O(n) space. but this is very difficult to 
+implement & might not work.
+
+Method 01:
+There are two best ways to solve this problem.
+1. find maxSumSubarray, maxSum.
+2. find sum of array, sum.
+3. find minimum sum subarray, minSum.
+4. find sum - minSum gives maxSum.
+5. There is a corner case with all array element as negative. eg:- {-12,-14}
+//Handle this.
+
+
+class Solution{
+    public:
+    int maxkadane(int *arr, int n){
+        int s=0,os=INT_MIN;
+        for(int i=0; i<n; i++){
+            s+=arr[i];
+            if(s>os)os=s;
+            if(s<0)s=0;
+        }
+        return os;
+    }
+
+    int minkadane(int *arr, int n){
+        int s=0,os=INT_MAX;
+        for(int i=0; i<n; i++){
+            s+=arr[i];
+            if(s<os)os=s;
+            if(s>=0)s=0;
+        }
+        return os;
+    }
+    
+    int circularSubarraySum(int arr[], int n){
+        
+        // your code here
+        if(n==1)return arr[0];
+        int ans1=maxkadane(arr,n);
+        int sum=0;
+        for(int i=0; i<n; i++){
+            sum+=arr[i];
+        }
+        int ans2=minkadane(arr,n);
+        cout<<sum<<" "<<ans1<<" "<<ans2<<endl;
+        if(ans2==sum)return max(sum,ans1);
+        int ans=sum-ans2;
+        return max(ans,ans1);
+    }
+};
+
+
+
+
+
+
+
+
+Method 02:- Here we will just change the sign of the array
+1. find maxSumSubarray, maxSum.
+2. find sum of array, sum.
+3. Here rather than finding minSumSubarray, convert array sign. This way minSumSubarray
+   becomes maxSumSubarray. you will not have to write extra codes.
+4. again find maxSumSubarray, maxSum2.
+5. maxSum2 = sum + maxSum2
+6. return max(maxSum,maxSum2);
+
+
 class Solution{
     public:
     int maxSum(int arr[], int n)
