@@ -1,6 +1,45 @@
 class Solution
 {
     public:
+    int peakElement(int arr[], int n)
+    {
+       // Your code here
+       int l=0, h=n-1;
+       if(n==1)return 0;
+       while(l<=h)
+       {
+           int m=(l+h)/2;
+           if(arr[m]>=arr[m-1]&&arr[m]>=arr[m+1])
+                return m;
+            else if(arr[m]>=arr[m-1]){
+                l=m+1;
+            }
+            else{
+                h=m-1;
+            }
+       }
+        
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution
+{
+    public:
     //If your mid element is <its left element, there will always be a peak at left
     int peakElement(int arr[], int n)
     {
