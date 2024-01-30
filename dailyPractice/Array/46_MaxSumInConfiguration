@@ -1,5 +1,34 @@
 https://practice.geeksforgeeks.org/problems/max-sum-in-the-configuration/1
 
+Brute force way is simple. for i=0, find i*arr[i], then rotate array by one (or use
+i%n) again calculate arr[i[*i then return the maximum.
+
+Optimal way:
+In brute force, we are doing a lots of repeatitive work. To avoid this, lets see some
+mathematics.
+
+arr = [a,b,c,d,e];
+s = a + b + c + d + e
+s0 = 0a + 1b + 2c + 3d + 4e
+s1 = 0e + 1a + 2b + 3c + 4d
+s2 = 0d + 1e + 2a + 3b + 4c
+.
+.
+.
+If we observe, We are doing lots of repeatition & can deduce a formula here.
+for, 
+s1 = s0 + some action
+s2 = s1 + some action
+.
+.
+.
+s1 = s0 + sum - n * arr[n-i-1]
+eg:- (0a + 1b + 2c + 3d + 4e) + (a + b + c + d + e) - (5*e)
+     1a + 2b + 3c + 4d + 5e - 5e
+     1a + 2b + 3c + 4d + 0e Here, we got s1.
+
+
+
 
 int max_sum(int arr[],int n)
 {
