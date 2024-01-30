@@ -74,13 +74,22 @@ public:
 
 Optimal Solution:-
 Intuition:- 
-1. Find breakpoint:- iterate from back and see if(arr[i]>arr[i-1]). store it in variable say m.
-                     eg:- 1,2,3,4,5. 5 is the breakpoint. 2 1 5 4 3 0 0, here 1 at index 1 is the breakpoint.
-2. find an elements which is greater than m but smallest in remaining element. eg. for breakpoint 1, we get 3 as our ideal element not zero.
-3. swap(1,3) //2 3 5 4 1 0 0
-4 sort the remaining element 2 3     0 0 1 4 5 is the next permutation
+1. Find breakpoint:- iterate from back and see if(arr[i]>arr[i-1]).
+                     store the variable in ele & index in ind 
+                     eg:- 1,2,3,4,5. 5 is the breakpoint. 2 1 5 4 3 0 0.
+                     here 1 at index 1 is the breakpoint.
 
+2.  find an elements. arr[i] > ele but smallest. 
+    eg. for breakpoint 1, we get 3 as our ideal element not zero.
+
+3.  swap(arr[ind], arr[min_ele_ind]
+    swap(1,3) //2 3 5 4 1 0 0.
+
+4 sort the remaining element 2 3     0 0 1 4 5 is the next permutation
 */
+
+
+
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
