@@ -1,4 +1,6 @@
-
+find kth node from beginning and end. also, find immediate previous of both. 
+once, both are found, adjust the links of their previous nodes and swap 
+their next pointer. 
 
 
 
