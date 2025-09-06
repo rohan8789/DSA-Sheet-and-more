@@ -85,6 +85,13 @@ check,
 do it till stack is left with single element, the right candidate to become a celebrity.
 Now check if he is really a celebrity or not...
 
+ALSO, CELEBRITY ARE ONLY THOSE WHEN ALL COLUMNS HAVE VALUE 1 AND ROWS HAVE VALUE ZERO. 
+MOST IMPORTANTLY, ROW AND COLUMN MUST BE SAME. 
+
+like: 04,14,24,34,44,54 is 1 then, 40,41,42,43,45 is 0. Only then, celebrity exits else -1
+
+
+
 Algorithm:-
 
 //User function template for C++
